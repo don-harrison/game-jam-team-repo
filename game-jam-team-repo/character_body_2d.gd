@@ -6,9 +6,13 @@ const JUMP_VELOCITY = -400.0
 const AIR_RESISTANCE = 3.0
 const DEFORMATION_AMOUNT = .8
 const FRICTION = 1
+const MAX_HEALTH = 3
 @onready var arrow: Sprite2D = $Arrow
 @onready var debug_line: Node2D = $DebugLine
 @onready var health: Node = $Health
+
+func _ready() -> void:
+	health.max_health = MAX_HEALTH
 
 func _process(delta: float) -> void:
 	var mouse_direction = get_local_mouse_position()
@@ -19,9 +23,6 @@ func _physics_process(delta: float) -> void:
 	# Get last collision to determine bounces
 	var last_collision = move_and_collide(velocity * delta,true)
 	if last_collision:
-		print("old velocity: ", get_velocity(),
-			"\nnormal: ", last_collision.get_normal(),
-			"\nbounce: ", calculate_bounce(get_velocity(), last_collision.get_normal()))
 		velocity = calculate_bounce(get_velocity(), last_collision.get_normal())
 	# Add the gravity.
 	velocity += get_gravity() * delta
