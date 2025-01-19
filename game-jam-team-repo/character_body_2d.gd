@@ -8,6 +8,7 @@ const DEFORMATION_AMOUNT = 1
 const FRICTION = 1
 @onready var arrow: Sprite2D = $Arrow
 @onready var debug_line: Node2D = $DebugLine
+@onready var health: Node = $Health
 
 func _process(delta: float) -> void:
 	var mouse_direction = get_local_mouse_position()
@@ -15,8 +16,6 @@ func _process(delta: float) -> void:
 	#print("angle ", arrow.rotation, "vector", mouse_direction.normalized())
 
 func _physics_process(delta: float) -> void:
-	
-	
 	# Get last collision to determine bounces
 	var last_collision = move_and_collide(velocity * delta,true)
 	if last_collision:
@@ -27,16 +26,14 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	velocity += get_gravity() * delta
 	
+	if Input.is_action_just_pressed("left_mouse_click"):
+		raytrace(Vector2(0,0), get_global_mouse_position())
+	
 	# Handle jump.
 	if Input.is_action_just_pressed("jump"): # Only jump while on the floor
-		var mouse_direction = position + get_local_mouse_position()
-		mouse_direction.angle()
-		#print(raytrace(position, mouse_direction))
 		velocity.y = JUMP_VELOCITY
 		
-		if debug_line.get_children().size() > 0:
-			debug_line.get_children()[0].queue_free()
-		draw_debug_line(Vector2(0,0), raytrace(position, mouse_direction))
+
 
 
 	# Allow for air movement control, so we don't check for on floor
@@ -80,10 +77,15 @@ func draw_debug_line(start: Vector2, end: Vector2):
 		debug_line.add_child(line)
 		
 func raytrace(origin: Vector2, direction: Vector2) -> Vector2:
+		if debug_line.get_children().size() > 0:
+			debug_line.get_children()[0].queue_free()
+			
 		var space_state = get_world_2d().direct_space_state
 		# use global coordinates, not local to node
-		var minDist = origin + Vector2(20 * direction.normalized().x, 20 * direction.normalized().y)
-		var query = PhysicsRayQueryParameters2D.create(minDist, direction)
+		#var minDist = origin + Vector2(20 * direction.normalized().x, 20 * direction.normalized().y)
+		var query = PhysicsRayQueryParameters2D.create(origin, direction)
+		draw_debug_line(origin, direction)
+
 		var result = space_state.intersect_ray(query)
 		var res_position =  Vector2(0,0)
 		
