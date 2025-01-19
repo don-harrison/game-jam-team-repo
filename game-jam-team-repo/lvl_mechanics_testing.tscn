@@ -14,7 +14,7 @@
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 z_index = 3
-position = Vector2(105, 295)
+position = Vector2(226, 453)
 floor_stop_on_slope = false
 script = ExtResource("2_hu8gd")
 

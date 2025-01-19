@@ -1,9 +1,11 @@
 extends CharacterBody2D
 
-const TOP_SPEED = 300.0
+const TOP_SPEED = 500.0
 const RUN_ACCEL = 50.0
 const JUMP_VELOCITY = -400.0
 const AIR_RESISTANCE = 30.0
+const DEFORMATION_AMOUNT = 1
+const FRICTION = 1
 @onready var arrow: Sprite2D = $Arrow
 @onready var debug_line: Node2D = $DebugLine
 
@@ -14,32 +16,14 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	
-	# Get last collision to determine bounces
-<<<<<<< HEAD
-	print("velocity: ", get_real_velocity())
-	var last_collision = get_last_slide_collision()
-	if last_collision:
-		print("normal: ", last_collision.get_normal())
-		
-=======
-	#var last_collision = get_last_slide_collision()
-	#if last_collision:
-		#print("angle: ", last_collision.get_angle(Vector2(0,1)),
-		#"\ncollider: ", last_collision.get_collider(),
-		#"\ncollider ID: ", last_collision.get_collider_id(),
-		#"\ncollider RID: ", last_collision.get_collider_rid(),
-		#"\ncollider shape: ", last_collision.get_collider_shape(),
-		#"\ncollider shape index: ", last_collision.get_collider_shape_index(),
-		#"\ncollider velocity: ", last_collision.get_collider_velocity(),
-		#"\ndepth: ", last_collision.get_depth(),
-		#"\nlocal shape: ", last_collision.get_local_shape(),
-		#"\nnormal: ", last_collision.get_normal(),
-		#"\nposition: ", last_collision.get_position(),
-		#"\nremainder: ", last_collision.get_remainder(),
-		#"\ntravel: ", last_collision.get_travel())
->>>>>>> 356a3049d790ba68e7cb51bee213624ed12a81d3
-
 	
+	# Get last collision to determine bounces
+	var last_collision = move_and_collide(velocity * delta,true)
+	if last_collision:
+		print("old velocity: ", get_velocity(),
+			"\nnormal: ", last_collision.get_normal(),
+			"\nbounce: ", calculate_bounce(get_velocity(), last_collision.get_normal()))
+		velocity = calculate_bounce(get_velocity(), last_collision.get_normal())
 	# Add the gravity.
 	velocity += get_gravity() * delta
 	
@@ -47,7 +31,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump"): # Only jump while on the floor
 		var mouse_direction = position + get_local_mouse_position()
 		mouse_direction.angle()
-		print(raytrace(position, mouse_direction))
+		#print(raytrace(position, mouse_direction))
 		velocity.y = JUMP_VELOCITY
 		
 		if debug_line.get_children().size() > 0:
@@ -73,8 +57,14 @@ func _physics_process(delta: float) -> void:
 		# Gradually slows down when no inputs given
 		velocity.x = move_toward(velocity.x, 0, AIR_RESISTANCE * delta)
 
-	move_and_slide()
+	move_and_collide(velocity * delta)
 
+# implementation of bounce angle from https://stackoverflow.com/questions/573084/how-to-calculate-bounce-angle#:~:text=u%20%3D%20(v%C2%A0%C2%B7%C2%A0n%20/%20n%C2%A0%C2%B7%C2%A0n)%20n%0Aw%20%3D%20v%20%E2%88%92%20u
+func calculate_bounce(incoming_vector: Vector2, surface_normal: Vector2):
+	#TODO: might need to refactor to allow different materials to have different values for deformation and friction
+	var deformation_vector = (incoming_vector.dot(surface_normal) / surface_normal.dot(surface_normal)) * surface_normal
+	var friction_vector = incoming_vector - deformation_vector
+	return friction_vector * FRICTION - deformation_vector * DEFORMATION_AMOUNT
 #cast a circle out in a line and see what point the circle touches
 #func circle_trace(radius, distance):
 	#var circle = CollisionShape2D.new()
