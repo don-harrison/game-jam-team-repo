@@ -14,21 +14,11 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	
 	# Get last collision to determine bounces
+	print("velocity: ", get_real_velocity())
 	var last_collision = get_last_slide_collision()
 	if last_collision:
-		print("angle: ", last_collision.get_angle(Vector2(0,1)),
-		"\ncollider: ", last_collision.get_collider(),
-		"\ncollider ID: ", last_collision.get_collider_id(),
-		"\ncollider RID: ", last_collision.get_collider_rid(),
-		"\ncollider shape: ", last_collision.get_collider_shape(),
-		"\ncollider shape index: ", last_collision.get_collider_shape_index(),
-		"\ncollider velocity: ", last_collision.get_collider_velocity(),
-		"\ndepth: ", last_collision.get_depth(),
-		"\nlocal shape: ", last_collision.get_local_shape(),
-		"\nnormal: ", last_collision.get_normal(),
-		"\nposition: ", last_collision.get_position(),
-		"\nremainder: ", last_collision.get_remainder(),
-		"\ntravel: ", last_collision.get_travel())
+		print("normal: ", last_collision.get_normal())
+		
 
 	
 	# Add the gravity.
@@ -41,7 +31,7 @@ func _physics_process(delta: float) -> void:
 		print(raytrace(position, mouse_direction))
 		velocity.y = JUMP_VELOCITY
 
-	# Allow for air movement control, don't check for on floor
+	# Allow for air movement control, so we don't check for on floor
 	if Input.is_action_just_pressed("left") && velocity.x == 0:
 		velocity.x = -RUN_ACCEL
 		

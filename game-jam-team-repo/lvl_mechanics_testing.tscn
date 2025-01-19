@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bunfhyunrkylf" path="res://Assets/Platformer Assets Pixel/PNG/tile_019.png" id="3_pcacn"]
 [ext_resource type="Texture2D" uid="uid://bbjxi46u08dgk" path="res://Assets/1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0541.png" id="5_fbj8v"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_i2ou0"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vochj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m1a2h"]
 
@@ -14,7 +14,8 @@
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 z_index = 3
-position = Vector2(128, 207)
+position = Vector2(105, 295)
+floor_stop_on_slope = false
 script = ExtResource("2_hu8gd")
 
 [node name="Arrow" type="Sprite2D" parent="CharacterBody2D"]
@@ -26,7 +27,7 @@ texture = ExtResource("5_fbj8v")
 offset = Vector2(30, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-shape = SubResource("CircleShape2D_i2ou0")
+shape = SubResource("RectangleShape2D_vochj")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 texture_filter = 1
@@ -34,7 +35,6 @@ texture = ExtResource("2_iohb2")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 position = Vector2(0, -1)
-zoom = Vector2(3, 3)
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 position = Vector2(37, 119)
