@@ -3,8 +3,8 @@ extends CharacterBody2D
 const TOP_SPEED = 500.0
 const RUN_ACCEL = 50.0
 const JUMP_VELOCITY = -400.0
-const AIR_RESISTANCE = 30.0
-const DEFORMATION_AMOUNT = 1
+const AIR_RESISTANCE = 3.0
+const DEFORMATION_AMOUNT = .8
 const FRICTION = 1
 @onready var arrow: Sprite2D = $Arrow
 @onready var debug_line: Node2D = $DebugLine
@@ -37,6 +37,7 @@ func _physics_process(delta: float) -> void:
 
 
 	# Allow for air movement control, so we don't check for on floor
+	# if we are stopped, get initial boost
 	if Input.is_action_just_pressed("left") && velocity.x == 0:
 		velocity.x = -RUN_ACCEL
 		
