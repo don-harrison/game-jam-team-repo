@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://kioaeqp4t48d"]
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bjbbep7b2tdhj"]
 
 [ext_resource type="Texture2D" uid="uid://c3r836ih0nxqy" path="res://Assets/Platformer Assets Pixel/Spritesheet/tilemap.png" id="1_s3rbo"]
 
@@ -1751,6 +1751,8 @@ texture_region_size = Vector2i(21, 21)
 37:42/0 = 0
 38:42/0 = 0
 39:42/0 = 0
+22:15/0 = 0
+27:16/0 = 0
 
 [resource]
 physics_layer_0/collision_layer = 1
