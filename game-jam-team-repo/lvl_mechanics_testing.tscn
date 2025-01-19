@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=4 uid="uid://2vtq07o4dr76"]
 
-[ext_resource type="PackedScene" uid="uid://bh03hlcm3sghb" path="res://scenes/slime/slime.tscn" id="1_c1q82"]
+[ext_resource type="PackedScene" uid="uid://bh03hlcm3sghb" path="res://slime.tscn" id="1_c1q82"]
 [ext_resource type="TileSet" uid="uid://kioaeqp4t48d" path="res://test_tileset.tres" id="1_fjpw6"]
 [ext_resource type="Texture2D" uid="uid://bunfhyunrkylf" path="res://Assets/Platformer Assets Pixel/PNG/tile_019.png" id="3_pcacn"]
 [ext_resource type="PackedScene" uid="uid://c4fen0j3gdqcg" path="res://scenes/enemies/unarmed_guard.tscn" id="4_g7leh"]
@@ -47,3 +47,4 @@ color = Color(1.63645e-06, 0.539482, 0.539844, 1)
 texture = ExtResource("5_ac457")
 
 [node name="Enemy" parent="." instance=ExtResource("5_1x87i")]
+position = Vector2(176, 167)

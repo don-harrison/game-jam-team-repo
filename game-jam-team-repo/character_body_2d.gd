@@ -13,11 +13,7 @@ const MAX_HEALTH = 3
 
 func _ready() -> void:
 	health.max_health = MAX_HEALTH
-	SignalManager.collision.connect(collided_with)
 	
-func collided_with(colliding_body):
-	print("signal recieved! colliding with ", colliding_body)
-
 func _process(delta: float) -> void:
 	var mouse_direction = get_local_mouse_position()
 	arrow.rotation = mouse_direction.angle()

@@ -12,6 +12,7 @@ func _process(delta: float) -> void:
 	pass
 
 func take_damage(damage: float):
+	print("took ", damage, " damage!")
 	health -= damage
 
 func restore_health(amount: float):
