@@ -27,8 +27,7 @@ func _physics_process(delta: float) -> void:
 	velocity += get_gravity() * delta
 	
 	if Input.is_action_just_pressed("left_mouse_click"):
-		var relative_hit_position = raytrace(Vector2(0,0), get_local_mouse_position())
-		print(relative_hit_position)
+		var relative_hit_position = raytrace(position, get_global_mouse_position())
 	# Handle jump.
 	if Input.is_action_just_pressed("jump"): # Only jump while on the floor
 		velocity.y = JUMP_VELOCITY
@@ -67,23 +66,26 @@ func calculate_bounce(incoming_vector: Vector2, surface_normal: Vector2):
 	#circle.transform
 	#	
 	
-func draw_debug_line(start: Vector2, end: Vector2):
-		var line: Line2D = Line2D.new()
-		line.z_as_relative = 1
-		line.points = [start, end]
-		line.width = 1
-		debug_line.add_child(line)
+#func draw_debug_line(start: Vector2, end: Vector2):
+		#var line: Line2D = Line2D.new()
+		#line.z_as_relative = 1
+		#line.points = [start, end]
+		#line.width = 1
+		#debug_line.add_child(line)
 		
 func raytrace(origin: Vector2, end: Vector2) -> Vector2:
 		#remove existing line from parent
 		if debug_line.get_children().size() > 0:
 			debug_line.get_children()[0].queue_free()
 		#draw new line
-		draw_debug_line(origin, end)
+		#draw_debug_line(origin, end)
+		
+		print("origin: ", origin, " end: ", end)
 
 		var space_state = get_world_2d().direct_space_state
-		var query = PhysicsRayQueryParameters2D.create(origin, end, 1)
-		query.exclude = [self]
+		var exclude = [self]
+		exclude += self.get_children()
+		var query = PhysicsRayQueryParameters2D.create(origin, end, 1, exclude)
 		var result = space_state.intersect_ray(query)
 		var res_position = Vector2(0,0)
 		
