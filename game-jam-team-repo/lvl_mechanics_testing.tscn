@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://2vtq07o4dr76"]
+[gd_scene load_steps=8 format=4 uid="uid://2vtq07o4dr76"]
 
 [ext_resource type="PackedScene" uid="uid://bh03hlcm3sghb" path="res://scenes/slime/slime.tscn" id="1_c1q82"]
 [ext_resource type="TileSet" uid="uid://kioaeqp4t48d" path="res://test_tileset.tres" id="1_fjpw6"]
 [ext_resource type="Texture2D" uid="uid://bunfhyunrkylf" path="res://Assets/Platformer Assets Pixel/PNG/tile_019.png" id="3_pcacn"]
 [ext_resource type="PackedScene" uid="uid://c4fen0j3gdqcg" path="res://scenes/enemies/unarmed_guard.tscn" id="4_g7leh"]
+[ext_resource type="PackedScene" uid="uid://x1g7h3jxstbu" path="res://enemy.tscn" id="5_1x87i"]
 [ext_resource type="Texture2D" uid="uid://b8066f35omqpl" path="res://Assets/1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0000.png" id="5_ac457"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m1a2h"]
@@ -44,3 +45,5 @@ position = Vector2(190, 273)
 scale = Vector2(5.26831, 4.83925)
 color = Color(1.63645e-06, 0.539482, 0.539844, 1)
 texture = ExtResource("5_ac457")
+
+[node name="Enemy" parent="." instance=ExtResource("5_1x87i")]
