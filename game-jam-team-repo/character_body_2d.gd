@@ -19,16 +19,16 @@ func _physics_process(delta: float) -> void:
 	# Get last collision to determine bounces
 	var last_collision = move_and_collide(velocity * delta,true)
 	if last_collision:
-		print("old velocity: ", get_velocity(),
-			"\nnormal: ", last_collision.get_normal(),
-			"\nbounce: ", calculate_bounce(get_velocity(), last_collision.get_normal()))
+		#print("old velocity: ", get_velocity(),
+			#"\nnormal: ", last_collision.get_normal(),
+			#"\nbounce: ", calculate_bounce(get_velocity(), last_collision.get_normal()))
 		velocity = calculate_bounce(get_velocity(), last_collision.get_normal())
 	# Add the gravity.
 	velocity += get_gravity() * delta
 	
 	if Input.is_action_just_pressed("left_mouse_click"):
-		raytrace(Vector2(0,0), get_global_mouse_position())
-	
+		var relative_hit_position = raytrace(Vector2(0,0), get_local_mouse_position())
+		print(relative_hit_position)
 	# Handle jump.
 	if Input.is_action_just_pressed("jump"): # Only jump while on the floor
 		velocity.y = JUMP_VELOCITY
@@ -74,19 +74,21 @@ func draw_debug_line(start: Vector2, end: Vector2):
 		line.width = 1
 		debug_line.add_child(line)
 		
-func raytrace(origin: Vector2, direction: Vector2) -> Vector2:
+func raytrace(origin: Vector2, end: Vector2) -> Vector2:
+		#remove existing line from parent
 		if debug_line.get_children().size() > 0:
 			debug_line.get_children()[0].queue_free()
-			
-		var space_state = get_world_2d().direct_space_state
-		# use global coordinates, not local to node
-		#var minDist = origin + Vector2(20 * direction.normalized().x, 20 * direction.normalized().y)
-		var query = PhysicsRayQueryParameters2D.create(origin, direction)
-		draw_debug_line(origin, direction)
+		#draw new line
+		draw_debug_line(origin, end)
 
+		var space_state = get_world_2d().direct_space_state
+		var query = PhysicsRayQueryParameters2D.create(origin, end, 1)
+		query.exclude = [self]
 		var result = space_state.intersect_ray(query)
-		var res_position =  Vector2(0,0)
+		var res_position = Vector2(0,0)
 		
+		#Why isnt the result populating when its from underneath a tile
+		print(result)
 		if result.has('position'):
 			res_position = result.position
 		return res_position
