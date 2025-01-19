@@ -33,9 +33,6 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump"): # Only jump while on the floor
 		velocity.y = JUMP_VELOCITY
 		
-
-
-
 	# Allow for air movement control, so we don't check for on floor
 	# if we are stopped, get initial boost
 	if Input.is_action_just_pressed("left") && velocity.x == 0:
