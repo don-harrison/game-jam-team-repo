@@ -11,10 +11,10 @@ script = ExtResource("1_5g885")
 
 [node name="Health" parent="." instance=ExtResource("2_fwkrx")]
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
+[node name="EnemyBody" type="RigidBody2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBody"]
 shape = SubResource("RectangleShape2D_cdltw")
 
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="EnemyBody"]
 texture = ExtResource("3_b60ef")

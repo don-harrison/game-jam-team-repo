@@ -47,4 +47,4 @@ color = Color(1.63645e-06, 0.539482, 0.539844, 1)
 texture = ExtResource("5_ac457")
 
 [node name="Enemy" parent="." instance=ExtResource("5_1x87i")]
-position = Vector2(176, 167)
+position = Vector2(317, 183)

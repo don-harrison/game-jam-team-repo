@@ -23,6 +23,7 @@ func _physics_process(delta: float) -> void:
 	# Get last collision to determine bounces
 	var last_collision = move_and_collide(velocity * delta,true)
 	if last_collision:
+		SignalManager.collision.emit(last_collision.get_collider())
 		velocity = calculate_bounce(get_velocity(), last_collision.get_normal())
 	# Add the gravity.
 	velocity += get_gravity() * delta
@@ -53,6 +54,8 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, AIR_RESISTANCE * delta)
 
 	move_and_collide(velocity * delta)
+	
+	
 
 # implementation of bounce angle from https://stackoverflow.com/questions/573084/how-to-calculate-bounce-angle#:~:text=u%20%3D%20(v%C2%A0%C2%B7%C2%A0n%20/%20n%C2%A0%C2%B7%C2%A0n)%20n%0Aw%20%3D%20v%20%E2%88%92%20u
 func calculate_bounce(incoming_vector: Vector2, surface_normal: Vector2):
@@ -96,3 +99,6 @@ func raytrace(origin: Vector2, end: Vector2) -> Vector2:
 			res_position = result.position
 		return res_position
 		
+func collide_reciever(collider: Node2D):
+	print("signal recieved in slime!", collider)
+	pass
