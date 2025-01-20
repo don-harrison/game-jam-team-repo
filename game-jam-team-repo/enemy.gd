@@ -10,7 +10,7 @@ func _ready() -> void:
 	health.health = MAX_HEALTH
 	body.contact_monitor = true
 	body.max_contacts_reported = 10
-	SignalManager.collision.connect(collide_reciever)
+	SignalManager.slime_collision.connect(collide_reciever)
 	pass # Replace with function body.
 
 
@@ -18,7 +18,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 	
-func collide_reciever(collider: Node2D):
+func collide_reciever(collider: Node2D, slime_velocity: Vector2):
 	if collider == body:
-		print("signal recieved in enemy! ", collider, ", my body is ", body)
+		var velocity_diff = (slime_velocity - body.linear_velocity).length()
+		#TODO: create some function to determine how much damage is done
+		print("slime hit me at speed of: ", velocity_diff)
+		if velocity_diff > 1000:
+			health.take_damage(1)
 		pass

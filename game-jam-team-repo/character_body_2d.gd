@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 	# Get last collision to determine bounces
 	var last_collision = move_and_collide(velocity * delta,true)
 	if last_collision:
-		SignalManager.collision.emit(last_collision.get_collider())
+		SignalManager.slime_collision.emit(last_collision.get_collider(), velocity)
 		velocity = calculate_bounce(get_velocity(), last_collision.get_normal())
 	# Add the gravity.
 	velocity += get_gravity() * delta
@@ -99,6 +99,3 @@ func raytrace(origin: Vector2, end: Vector2) -> Vector2:
 			res_position = result.position
 		return res_position
 		
-func collide_reciever(collider: Node2D):
-	print("signal recieved in slime!", collider)
-	pass
