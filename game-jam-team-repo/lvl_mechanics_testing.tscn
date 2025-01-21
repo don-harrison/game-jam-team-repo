@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://2vtq07o4dr76"]
+[gd_scene load_steps=6 format=4 uid="uid://2vtq07o4dr76"]
 
 [ext_resource type="PackedScene" uid="uid://bh03hlcm3sghb" path="res://slime.tscn" id="1_c1q82"]
 [ext_resource type="TileSet" uid="uid://kioaeqp4t48d" path="res://test_tileset.tres" id="1_fjpw6"]
 [ext_resource type="PackedScene" uid="uid://cvmifsxo60u35" path="res://enemy.tscn" id="4_0ue8s"]
 [ext_resource type="Texture2D" uid="uid://b8066f35omqpl" path="res://Assets/1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0000.png" id="5_ac457"]
+[ext_resource type="PackedScene" uid="uid://f4jcapbxpx0s" path="res://scenes/enemies/shooty_enemy.tscn" id="5_k4k2q"]
 
 [node name="lvl_mechanics_testing" type="Node2D"]
 
@@ -27,5 +28,9 @@ texture = ExtResource("5_ac457")
 [node name="Slime" parent="." instance=ExtResource("1_c1q82")]
 position = Vector2(170, 253)
 
-[node name="Enemy" parent="." instance=ExtResource("4_0ue8s")]
+[node name="GoombaEnemy" parent="." instance=ExtResource("4_0ue8s")]
 position = Vector2(326, 433)
+
+[node name="ShootyEnemy" parent="." instance=ExtResource("5_k4k2q")]
+position = Vector2(437, 199)
+rotation = -1.95887

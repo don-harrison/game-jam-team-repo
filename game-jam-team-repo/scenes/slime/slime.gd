@@ -1,8 +1,8 @@
 extends CharacterBody2D
 class_name Slime
 
-const TOP_SPEED = 500.0
-const RUN_ACCEL = 50.0
+const TOP_SPEED = 2000.0
+const RUN_ACCEL = 500.0
 const JUMP_VELOCITY = -400.0
 const AIR_RESISTANCE = 3.0
 const DEFORMATION_AMOUNT = .8
@@ -41,11 +41,11 @@ func _physics_process(delta: float) -> void:
 		
 	# Allow for air movement control, so we don't check for on floor
 	# if we are stopped, get initial boost
-	if Input.is_action_just_pressed("left") && velocity.x == 0:
-		velocity.x = -RUN_ACCEL
+	#if Input.is_action_just_pressed("left") && velocity.x == 0:
+	#	velocity.x = -RUN_ACCEL
 		
-	if Input.is_action_just_pressed("right") && velocity.x == 0:
-		velocity.x = RUN_ACCEL
+	#if Input.is_action_just_pressed("right") && velocity.x == 0:
+	#	velocity.x = RUN_ACCEL
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.

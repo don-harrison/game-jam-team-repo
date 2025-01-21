@@ -6,7 +6,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cdltw"]
 
-[node name="Enemy" type="Node2D"]
+[node name="GoombaEnemy" type="Node2D"]
 script = ExtResource("1_5g885")
 
 [node name="Health" parent="." instance=ExtResource("2_fwkrx")]

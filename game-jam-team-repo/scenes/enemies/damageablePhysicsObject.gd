@@ -7,12 +7,13 @@ const MAX_HEALTH = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	print(self, " loaded!")
 	health.max_health = MAX_HEALTH
 	health.health = MAX_HEALTH
 	body.contact_monitor = true
 	body.max_contacts_reported = 10
 	SignalManager.slime_collision.connect(collide_reciever)
-	pass # Replace with function body.
+	pass 
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
