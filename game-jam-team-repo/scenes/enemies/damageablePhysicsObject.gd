@@ -1,4 +1,5 @@
 extends Node2D
+class_name DamageablePhysicsObject
 
 const MAX_HEALTH = 1
 @onready var health: Node = $Health
@@ -18,7 +19,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 	
-func collide_reciever(collider: Node2D, slime_velocity: Vector2):
+func collide_reciever(slime: CharacterBody2D, collider: Node2D, slime_velocity: Vector2):
 	if collider == body:
 		var velocity_diff = (slime_velocity - body.linear_velocity).length()
 		#TODO: create some function to determine how much damage is done

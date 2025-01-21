@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvmifsxo60u35"]
+[gd_scene load_steps=5 format=3 uid="uid://x1g7h3jxstbu"]
 
-[ext_resource type="Script" path="res://scenes/enemies/damageablePhysicsObject.gd" id="1_5g885"]
+[ext_resource type="Script" path="res://enemy.gd" id="1_5g885"]
 [ext_resource type="PackedScene" uid="uid://be2xlyje1b3ky" path="res://components/health.tscn" id="2_fwkrx"]
 [ext_resource type="Texture2D" uid="uid://dmlnjx4nl6208" path="res://Assets/Platformer Assets Pixel/PNG/tile_226.png" id="3_b60ef"]
 

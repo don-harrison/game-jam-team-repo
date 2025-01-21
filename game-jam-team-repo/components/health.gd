@@ -1,4 +1,5 @@
 extends Node
+class_name Health
 
 var health
 var max_health

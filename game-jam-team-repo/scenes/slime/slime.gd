@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Slime
 
 const TOP_SPEED = 500.0
 const RUN_ACCEL = 50.0
@@ -23,7 +24,11 @@ func _physics_process(delta: float) -> void:
 	# Get last collision to determine bounces
 	var last_collision = move_and_collide(velocity * delta,true)
 	if last_collision:
-		SignalManager.slime_collision.emit(last_collision.get_collider(), velocity)
+		var damageable_object_body := last_collision.get_collider() as RigidBody2D
+		# do we check here for whether we deal damage or take damage?
+		if damageable_object_body && damageable_object_body.get_parent():
+			var damageable_object = damageable_object_body.get_parent()
+			SignalManager.slime_collision.emit(self, damageable_object_body, velocity)
 		velocity = calculate_bounce(get_velocity(), last_collision.get_normal())
 	# Add the gravity.
 	velocity += get_gravity() * delta

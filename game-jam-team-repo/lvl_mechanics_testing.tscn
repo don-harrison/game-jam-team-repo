@@ -1,30 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://2vtq07o4dr76"]
+[gd_scene load_steps=5 format=4 uid="uid://2vtq07o4dr76"]
 
 [ext_resource type="PackedScene" uid="uid://bh03hlcm3sghb" path="res://slime.tscn" id="1_c1q82"]
 [ext_resource type="TileSet" uid="uid://kioaeqp4t48d" path="res://test_tileset.tres" id="1_fjpw6"]
-[ext_resource type="Texture2D" uid="uid://bunfhyunrkylf" path="res://Assets/Platformer Assets Pixel/PNG/tile_019.png" id="3_pcacn"]
-[ext_resource type="PackedScene" uid="uid://c4fen0j3gdqcg" path="res://scenes/enemies/unarmed_guard.tscn" id="4_g7leh"]
-[ext_resource type="PackedScene" uid="uid://x1g7h3jxstbu" path="res://enemy.tscn" id="5_1x87i"]
+[ext_resource type="PackedScene" uid="uid://cvmifsxo60u35" path="res://enemy.tscn" id="4_0ue8s"]
 [ext_resource type="Texture2D" uid="uid://b8066f35omqpl" path="res://Assets/1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0000.png" id="5_ac457"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_m1a2h"]
-
 [node name="lvl_mechanics_testing" type="Node2D"]
-
-[node name="Slime" parent="." instance=ExtResource("1_c1q82")]
-position = Vector2(140, 218)
-
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(37, 119)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2(1.5, 0.5)
-shape = SubResource("CircleShape2D_m1a2h")
-
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
-texture_filter = 1
-position = Vector2(3.5, 2.5)
-texture = ExtResource("3_pcacn")
 
 [node name="TileMapLayers" type="Node2D" parent="."]
 
@@ -37,14 +18,14 @@ tile_set = ExtResource("1_fjpw6")
 use_kinematic_bodies = true
 navigation_enabled = false
 
-[node name="Unarmed Guard" parent="." instance=ExtResource("4_g7leh")]
-position = Vector2(335, 217)
-
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(190, 273)
 scale = Vector2(5.26831, 4.83925)
 color = Color(1.63645e-06, 0.539482, 0.539844, 1)
 texture = ExtResource("5_ac457")
 
-[node name="Enemy" parent="." instance=ExtResource("5_1x87i")]
-position = Vector2(317, 183)
+[node name="Slime" parent="." instance=ExtResource("1_c1q82")]
+position = Vector2(170, 253)
+
+[node name="Enemy" parent="." instance=ExtResource("4_0ue8s")]
+position = Vector2(326, 433)
