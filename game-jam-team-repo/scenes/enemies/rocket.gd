@@ -13,8 +13,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	for bod in get_colliding_bodies():
-		print(bod)
+	#for bod in get_colliding_bodies():
+		#print(bod)
 	pass
 
 func launch_towards(start_position: Vector2, target_position: Vector2) -> void:
@@ -27,5 +27,5 @@ func launch_towards(start_position: Vector2, target_position: Vector2) -> void:
 		get_rid(),
 		PhysicsServer2D.BODY_STATE_LINEAR_VELOCITY,
 		position_diff.normalized() * SPEED)
-	print("launching towards ", target_position, " from ", start_position, ", setting velocity to ", position_diff.normalized() * SPEED)
+	#print("launching towards ", target_position, " from ", start_position, ", setting velocity to ", position_diff.normalized() * SPEED)
 	pass

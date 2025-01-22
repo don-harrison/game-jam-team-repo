@@ -24,10 +24,10 @@ func _process(delta: float) -> void:
 
 func collide_reciever(slime: CharacterBody2D, collider: Node2D, slime_velocity: Vector2):
 	super(slime, collider, slime_velocity)
-	print("subclass text")
+	#print("subclass text")
 	
 func shoot_at_player() -> void:
-	print("Firing at the player! ", slime.global_position)
+	#print("Firing at the player! ", slime.global_position)
 	rocket.launch_towards(shoot_pos.global_position, slime.global_position)
 	
 	

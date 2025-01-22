@@ -91,7 +91,7 @@ func draw_debug_line(start: Vector2, end: Vector2):
 		return line
 		
 func raytrace(origin: Vector2, end: Vector2) -> Vector2:
-		print("origin: ", origin, " end: ", end)
+		#print("origin: ", origin, " end: ", end)
 
 		var space_state = get_world_2d().direct_space_state
 		var query = PhysicsRayQueryParameters2D.create(origin, end.normalized() * 200, 1)
