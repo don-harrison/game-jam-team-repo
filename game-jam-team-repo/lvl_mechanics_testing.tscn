@@ -26,7 +26,7 @@ color = Color(1.63645e-06, 0.539482, 0.539844, 1)
 texture = ExtResource("5_ac457")
 
 [node name="Slime" parent="." instance=ExtResource("1_c1q82")]
-position = Vector2(-73, -57)
+position = Vector2(117, -5)
 
 [node name="GoombaEnemy" parent="." instance=ExtResource("4_0ue8s")]
 position = Vector2(326, 433)

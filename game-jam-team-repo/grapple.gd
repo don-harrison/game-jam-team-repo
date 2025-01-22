@@ -5,7 +5,7 @@ extends Node2D
 @export var grapple_spring_constant = .5
 @export var grapple_damping = 1.0
 
-const move_toward_grapple_speed = 50
+const move_toward_grapple_speed = 10
 var grapple_point = Vector2.ZERO
 var grapple_container
 

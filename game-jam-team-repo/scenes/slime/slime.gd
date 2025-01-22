@@ -11,24 +11,22 @@ const MAX_HEALTH = 3
 @onready var arrow: Sprite2D = $Arrow
 @onready var debug_line: Node2D = $DebugLine
 @onready var health: Node = $Health
-var grapple_point: Vector2 = Vector2.ZERO
-const grapple_spring_constant = .5
-const grapple_damping = 1.0
 @onready var grapple: Node2D = $Grapple
 
 func _ready() -> void:
 	health.max_health = MAX_HEALTH
 	
 func _process(delta: float) -> void:
-	var mouse_direction = get_local_mouse_position()
-	arrow.rotation = mouse_direction.angle()
+	rotate_arrow_pointer()
 	#print("angle ", arrow.rotation, "vector", mouse_direction.normalized())
 
 func _physics_process(delta: float) -> void:
 	# Get last collision to determine bounces
 	var last_collision = move_and_collide(velocity * delta,true)
+	
 	if last_collision:
 		var damageable_object_body := last_collision.get_collider() as RigidBody2D
+		
 		# do we check here for whether we deal damage or take damage?
 		if damageable_object_body && damageable_object_body.get_parent():
 			var damageable_object = damageable_object_body.get_parent()
@@ -68,24 +66,14 @@ func _physics_process(delta: float) -> void:
 
 	move_and_collide(velocity * delta)
 	
-	
-
 # implementation of bounce angle from https://stackoverflow.com/questions/573084/how-to-calculate-bounce-angle#:~:text=u%20%3D%20(v%C2%A0%C2%B7%C2%A0n%20/%20n%C2%A0%C2%B7%C2%A0n)%20n%0Aw%20%3D%20v%20%E2%88%92%20u
 func calculate_bounce(incoming_vector: Vector2, surface_normal: Vector2):
 	#TODO: might need to refactor to allow different materials to have different values for deformation and friction
 	var deformation_vector = (incoming_vector.dot(surface_normal) / surface_normal.dot(surface_normal)) * surface_normal
 	var friction_vector = incoming_vector - deformation_vector
 	return friction_vector * FRICTION - deformation_vector * DEFORMATION_AMOUNT
-#cast a circle out in a line and see what point the circle touches
-#func circle_trace(radius, distance):
-	#var circle = CollisionShape2D.new()
-	#circle.shape = CircleShape2D.new()
-	#circle.transform
-	#	
 
 func raytrace(origin: Vector2, end: Vector2) -> Vector2:
-		#print("origin: ", origin, " end: ", end)
-
 		var space_state = get_world_2d().direct_space_state
 		var query = PhysicsRayQueryParameters2D.create(origin, end, 1)
 		query.exclude = [self, self.get_child(1)]
@@ -97,3 +85,7 @@ func raytrace(origin: Vector2, end: Vector2) -> Vector2:
 		if result.has('position'):
 			res_position = result.position
 		return res_position
+
+func rotate_arrow_pointer() -> void:
+	var mouse_direction = get_local_mouse_position()
+	arrow.rotation = mouse_direction.angle()
