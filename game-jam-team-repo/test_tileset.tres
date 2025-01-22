@@ -1,6 +1,9 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://kioaeqp4t48d"]
+[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://kioaeqp4t48d"]
 
 [ext_resource type="Texture2D" uid="uid://c3r836ih0nxqy" path="res://Assets/Platformer Assets Pixel/Spritesheet/tilemap.png" id="1_s3rbo"]
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_4uoy2"]
+tile_data = PackedInt32Array(0, 655361, 27, 65536, 655361, 28, 131072, 655361, 29)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2lpxi"]
 texture = ExtResource("1_s3rbo")
@@ -863,6 +866,7 @@ texture_region_size = Vector2i(21, 21)
 1:6/0/physics_layer_0/polygon_0/one_way_margin = 0.0
 
 [resource]
-tile_size = Vector2i(21, 21)
+tile_size = Vector2i(20, 20)
 physics_layer_0/collision_layer = 3
 sources/1 = SubResource("TileSetAtlasSource_2lpxi")
+pattern_0 = SubResource("TileMapPattern_4uoy2")
