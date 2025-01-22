@@ -11,10 +11,10 @@ const MAX_HEALTH = 3
 @onready var arrow: Sprite2D = $Arrow
 @onready var debug_line: Node2D = $DebugLine
 @onready var health: Node = $Health
-@onready var grapple: Node = $Grapple
 var grapple_point: Vector2 = Vector2.ZERO
 const grapple_spring_constant = .5
 const grapple_damping = 1.0
+@onready var grapple: Node2D = $Grapple
 
 func _ready() -> void:
 	health.max_health = MAX_HEALTH
@@ -39,12 +39,12 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("left_mouse_click"):
 		var hit_position = raytrace(global_position, get_global_mouse_position())
-		attach_grapple(hit_position)
-	move_towards_grapple()
+		grapple.attach_grapple(hit_position)
+	grapple.move_towards_grapple()
 	# Handle jump.
 	if Input.is_action_just_pressed("jump"): # Only jump while on the floor
 		velocity.y = JUMP_VELOCITY
-		grapple_point = Vector2.ZERO
+		grapple.set_grapple_point(Vector2.ZERO)
 		
 	
 	# Allow for air movement control, so we don't check for on floor
@@ -97,44 +97,3 @@ func raytrace(origin: Vector2, end: Vector2) -> Vector2:
 		if result.has('position'):
 			res_position = result.position
 		return res_position
-	
-func move_towards_grapple():
-	#get relative position of slime to grapple anchor point
-	const speed = 50
-	if grapple_point != Vector2.ZERO:
-		var rel_position = grapple_point - position
-		velocity += (rel_position.normalized() * speed)
-	
-	
-	#var gamma: float = .5 * sqrt(4*grapple_spring_constant - grapple_damping**2)
-	#if gamma == 0: return
-	#var spring_vector: Vector2 = rel_position * (grapple_damping / (2 * gamma)) + velocity * (1/gamma)
-	#
-	#if(velocity > Vector2.ZERO):
-		#velocity += spring_vector
-	
-func attach_grapple(position: Vector2) -> void:
-	if grapple and grapple.get_child_count() > 0:
-		grapple.get_children()[0].queue_free()
-	
-	grapple_point = position
-	
-	var spring: DampedSpringJoint2D = DampedSpringJoint2D.new()
-	var attach_point: Area2D = Area2D.new()
-	#var collisionShape = CollisionShape2D.new()
-	#var attach_point_collider: CircleShape2D = CircleShape2D.new()
-	
-	#collisionShape.shape = attach_point_collider
-	#attach_point.add_child(collisionShape)
-	attach_point.position = position
-	var sprite = Sprite2D.new()
-	sprite.texture = preload("res://Assets/1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0001.png")
-	attach_point.add_child(sprite)
-	attach_point.z_index = 4
-	get_parent().add_child(attach_point)
-	#
-	#spring.node_a = self.get_path()
-	#spring.node_b = attach_point.get_path()
-	#get_parent().add_child(spring)
-	
-	
