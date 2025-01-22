@@ -82,19 +82,12 @@ func calculate_bounce(incoming_vector: Vector2, surface_normal: Vector2):
 	#circle.shape = CircleShape2D.new()
 	#circle.transform
 	#	
-	
-func draw_debug_line(start: Vector2, end: Vector2):
-		var line: Line2D = Line2D.new()
-		line.z_as_relative = 1
-		line.points = [start, end]
-		line.width = 1
-		return line
-		
+
 func raytrace(origin: Vector2, end: Vector2) -> Vector2:
 		#print("origin: ", origin, " end: ", end)
 
 		var space_state = get_world_2d().direct_space_state
-		var query = PhysicsRayQueryParameters2D.create(origin, end.normalized() * 200, 1)
+		var query = PhysicsRayQueryParameters2D.create(origin, end, 1)
 		query.exclude = [self, self.get_child(1)]
 		var result = space_state.intersect_ray(query)
 		var res_position = Vector2(0,0)
