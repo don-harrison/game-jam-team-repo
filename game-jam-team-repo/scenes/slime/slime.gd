@@ -11,6 +11,7 @@ const MAX_HEALTH = 3
 @onready var arrow: Sprite2D = $Arrow
 @onready var debug_line: Node2D = $DebugLine
 @onready var health: Node = $Health
+@onready var grapple: Node = $Grapple
 
 func _ready() -> void:
 	health.max_health = MAX_HEALTH
@@ -34,7 +35,8 @@ func _physics_process(delta: float) -> void:
 	velocity += get_gravity() * delta
 	
 	if Input.is_action_just_pressed("left_mouse_click"):
-		var relative_hit_position = raytrace(position, get_global_mouse_position())
+		var relative_hit_position = raytrace(global_position, get_global_mouse_position())
+		attach_grapple(relative_hit_position)
 	# Handle jump.
 	if Input.is_action_just_pressed("jump"): # Only jump while on the floor
 		velocity.y = JUMP_VELOCITY
@@ -75,26 +77,19 @@ func calculate_bounce(incoming_vector: Vector2, surface_normal: Vector2):
 	#circle.transform
 	#	
 	
-#func draw_debug_line(start: Vector2, end: Vector2):
-		#var line: Line2D = Line2D.new()
-		#line.z_as_relative = 1
-		#line.points = [start, end]
-		#line.width = 1
-		#debug_line.add_child(line)
+func draw_debug_line(start: Vector2, end: Vector2):
+		var line: Line2D = Line2D.new()
+		line.z_as_relative = 1
+		line.points = [start, end]
+		line.width = 1
+		return line
 		
 func raytrace(origin: Vector2, end: Vector2) -> Vector2:
-		#remove existing line from parent
-		if debug_line.get_children().size() > 0:
-			debug_line.get_children()[0].queue_free()
-		#draw new line
-		#draw_debug_line(origin, end)
-		
 		print("origin: ", origin, " end: ", end)
 
 		var space_state = get_world_2d().direct_space_state
-		var exclude = [self]
-		exclude += self.get_children()
-		var query = PhysicsRayQueryParameters2D.create(origin, end, 1, exclude)
+		var query = PhysicsRayQueryParameters2D.create(origin, end, 1)
+		query.exclude = [self, self.get_child(1)]
 		var result = space_state.intersect_ray(query)
 		var res_position = Vector2(0,0)
 		
@@ -104,3 +99,24 @@ func raytrace(origin: Vector2, end: Vector2) -> Vector2:
 			res_position = result.position
 		return res_position
 		
+func attach_grapple(position: Vector2) -> void:
+	if grapple and grapple.get_child_count() > 0:
+		grapple.get_children()[0].queue_free()
+		
+	var spring: DampedSpringJoint2D = DampedSpringJoint2D.new()
+	var attach_point: Area2D = Area2D.new()
+	#var collisionShape = CollisionShape2D.new()
+	#var attach_point_collider: CircleShape2D = CircleShape2D.new()
+	
+	#collisionShape.shape = attach_point_collider
+	#attach_point.add_child(collisionShape)
+	attach_point.position = position
+	var sprite = Sprite2D.new()
+	sprite.texture = preload("res://Assets/1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0001.png")
+	attach_point.add_child(sprite)
+	attach_point.z_index = 4
+	get_parent().add_child(attach_point)
+	
+	spring.node_a = self.get_path()
+	spring.node_b = attach_point.get_path()
+	
