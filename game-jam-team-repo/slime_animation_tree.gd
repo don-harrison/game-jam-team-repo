@@ -9,11 +9,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	update_animation_parameters()
+	update_animation_parameters(delta)
 
-func update_animation_parameters():
-	print(slime.velocity)
-	if slime.velocity < Vector2(5, 20):
+func update_animation_parameters(delta: float):
+	if slime.velocity < Vector2(1, 15) && slime.velocity > Vector2(-1, -15):
 		self["parameters/conditions/idle"] = true
 		self.active = true
 	else:
