@@ -1,12 +1,70 @@
-[gd_scene load_steps=7 format=3 uid="uid://bh03hlcm3sghb"]
+[gd_scene load_steps=18 format=3 uid="uid://bh03hlcm3sghb"]
 
 [ext_resource type="Script" path="res://scenes/slime/slime.gd" id="1_v5bhg"]
 [ext_resource type="Texture2D" uid="uid://bbjxi46u08dgk" path="res://Assets/1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0541.png" id="2_l54ee"]
-[ext_resource type="Texture2D" uid="uid://dbl8humkecqt1" path="res://Assets/slime_character.png" id="3_oeocf"]
+[ext_resource type="Texture2D" uid="uid://cfvo3xxwo3lus" path="res://Assets/slime_idle_spritesheet.png" id="3_iai81"]
 [ext_resource type="PackedScene" uid="uid://be2xlyje1b3ky" path="res://components/health.tscn" id="4_ct4i7"]
 [ext_resource type="PackedScene" uid="uid://bs8fs52x682or" path="res://grapple.tscn" id="5_vqape"]
+[ext_resource type="Script" path="res://slime_animation_tree.gd" id="6_7y61w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uyb21"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m0rqn"]
+animation = &"slime_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nbw2u"]
+animation = &"slime_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w6p0y"]
+animation = &"slime_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dwqgj"]
+animation = &"slime_idle"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_o1olr"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_m0rqn")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_nbw2u")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_w6p0y")
+blend_point_2/pos = Vector2(0, 1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_dwqgj")
+blend_point_3/pos = Vector2(0, -1)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hv3pf"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4yq2w"]
+states/Idle/node = SubResource("AnimationNodeBlendSpace2D_o1olr")
+states/Idle/position = Vector2(475, 125)
+states/Start/position = Vector2(253, 125)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_hv3pf")]
+
+[sub_resource type="Animation" id="Animation_wagyv"]
+
+[sub_resource type="Animation" id="Animation_7g1cn"]
+resource_name = "slime_idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.566667, 0.733333, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kls4j"]
+_data = {
+"RESET": SubResource("Animation_wagyv"),
+"slime_idle": SubResource("Animation_7g1cn")
+}
 
 [node name="Slime" type="CharacterBody2D"]
 z_index = 3
@@ -25,16 +83,18 @@ offset = Vector2(30, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, 1)
+position = Vector2(0, 3)
 scale = Vector2(0.691566, 0.691566)
-texture = ExtResource("3_oeocf")
+texture = ExtResource("3_iai81")
+hframes = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 0.96)
 shape = SubResource("CircleShape2D_uyb21")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -1)
-zoom = Vector2(2, 2)
+zoom = Vector2(2.3, 2.3)
 
 [node name="DebugLine" type="Node2D" parent="."]
 
@@ -42,3 +102,16 @@ zoom = Vector2(2, 2)
 
 [node name="Grapple" parent="." node_paths=PackedStringArray("node_a") instance=ExtResource("5_vqape")]
 node_a = NodePath("..")
+
+[node name="Slime_AnimationTree" type="AnimationTree" parent="."]
+active = false
+tree_root = SubResource("AnimationNodeStateMachine_4yq2w")
+anim_player = NodePath("../Slime_AnimationPlayer")
+parameters/conditions/idle = false
+parameters/Idle/blend_position = Vector2(-0.000947893, 0.013986)
+script = ExtResource("6_7y61w")
+
+[node name="Slime_AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kls4j")
+}

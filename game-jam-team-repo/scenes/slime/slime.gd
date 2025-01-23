@@ -71,7 +71,9 @@ func calculate_bounce(incoming_vector: Vector2, surface_normal: Vector2):
 	#TODO: might need to refactor to allow different materials to have different values for deformation and friction
 	var deformation_vector = (incoming_vector.dot(surface_normal) / surface_normal.dot(surface_normal)) * surface_normal
 	var friction_vector = incoming_vector - deformation_vector
-	return friction_vector * FRICTION - deformation_vector * DEFORMATION_AMOUNT
+	var result_bounce: Vector2 = friction_vector * FRICTION - deformation_vector * DEFORMATION_AMOUNT
+	
+	return result_bounce
 
 func raytrace(origin: Vector2, end: Vector2) -> Vector2:
 		var space_state = get_world_2d().direct_space_state
