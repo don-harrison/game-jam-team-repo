@@ -1,13 +1,229 @@
-[gd_scene load_steps=18 format=3 uid="uid://bh03hlcm3sghb"]
+[gd_scene load_steps=73 format=3 uid="uid://bh03hlcm3sghb"]
 
 [ext_resource type="Script" path="res://scenes/slime/slime.gd" id="1_v5bhg"]
 [ext_resource type="Texture2D" uid="uid://bbjxi46u08dgk" path="res://Assets/1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0541.png" id="2_l54ee"]
-[ext_resource type="Texture2D" uid="uid://cfvo3xxwo3lus" path="res://Assets/slime_idle_spritesheet.png" id="3_iai81"]
 [ext_resource type="PackedScene" uid="uid://be2xlyje1b3ky" path="res://components/health.tscn" id="4_ct4i7"]
+[ext_resource type="Texture2D" uid="uid://c5s2xqnngc3au" path="res://Assets/slime_idle.png" id="4_du4x7"]
 [ext_resource type="PackedScene" uid="uid://bs8fs52x682or" path="res://grapple.tscn" id="5_vqape"]
 [ext_resource type="Script" path="res://slime_animation_tree.gd" id="6_7y61w"]
+[ext_resource type="Texture2D" uid="uid://tm4s7j3kbsti" path="res://Assets/slime_walk_right.png" id="7_02c2x"]
+[ext_resource type="Texture2D" uid="uid://bgwlc02pil5nh" path="res://Assets/slime_falling_left.png" id="7_lq4jw"]
+[ext_resource type="Texture2D" uid="uid://8axqqliwt6h5" path="res://Assets/slime_jump_left.png" id="8_h17lt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvcj6"]
+atlas = ExtResource("7_lq4jw")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oraif"]
+atlas = ExtResource("7_lq4jw")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rw1sh"]
+atlas = ExtResource("7_lq4jw")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyy4p"]
+atlas = ExtResource("7_lq4jw")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i571d"]
+atlas = ExtResource("7_lq4jw")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63gs5"]
+atlas = ExtResource("7_lq4jw")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5h4b"]
+atlas = ExtResource("4_du4x7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjb4d"]
+atlas = ExtResource("4_du4x7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dpwm"]
+atlas = ExtResource("4_du4x7")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c72di"]
+atlas = ExtResource("4_du4x7")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ch41n"]
+atlas = ExtResource("4_du4x7")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2lvq"]
+atlas = ExtResource("4_du4x7")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ppyvp"]
+atlas = ExtResource("8_h17lt")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ondod"]
+atlas = ExtResource("8_h17lt")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_je5oa"]
+atlas = ExtResource("8_h17lt")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmlqx"]
+atlas = ExtResource("8_h17lt")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxtt5"]
+atlas = ExtResource("8_h17lt")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lrcyh"]
+atlas = ExtResource("8_h17lt")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bxrgc"]
+atlas = ExtResource("7_02c2x")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6c7y"]
+atlas = ExtResource("7_02c2x")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eueuc"]
+atlas = ExtResource("7_02c2x")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfkj1"]
+atlas = ExtResource("7_02c2x")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_posmv"]
+atlas = ExtResource("7_02c2x")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1itxp"]
+atlas = ExtResource("7_02c2x")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_833oy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mvcj6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oraif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rw1sh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eyy4p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i571d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63gs5")
+}],
+"loop": true,
+"name": &"slime_fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q5h4b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tjb4d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1dpwm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c72di")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ch41n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k2lvq")
+}],
+"loop": true,
+"name": &"slime_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ppyvp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ondod")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_je5oa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmlqx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxtt5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lrcyh")
+}],
+"loop": true,
+"name": &"slime_jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bxrgc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v6c7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eueuc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lfkj1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_posmv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1itxp")
+}],
+"loop": true,
+"name": &"slime_walk",
+"speed": 6.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uyb21"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t3hdm"]
+animation = &"slime_fall_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bqehj"]
+animation = &"slime_fall_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cnxvp"]
+animation = &"slime_fall_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s3d8d"]
+animation = &"slime_fall_right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_ql601"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_t3hdm")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_bqehj")
+blend_point_1/pos = Vector2(-1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_cnxvp")
+blend_point_2/pos = Vector2(0, -0.9)
+blend_point_3/node = SubResource("AnimationNodeAnimation_s3d8d")
+blend_point_3/pos = Vector2(1, 0)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m0rqn"]
 animation = &"slime_idle"
@@ -21,6 +237,21 @@ animation = &"slime_idle"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dwqgj"]
 animation = &"slime_idle"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qrqpe"]
+animation = &"slime_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_plaom"]
+animation = &"slime_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rgrai"]
+animation = &"slime_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_df5kb"]
+animation = &"slime_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j3y86"]
+animation = &"slime_idle"
+
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_o1olr"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_m0rqn")
 blend_point_0/pos = Vector2(-1, 0)
@@ -30,40 +261,404 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_w6p0y")
 blend_point_2/pos = Vector2(0, 1)
 blend_point_3/node = SubResource("AnimationNodeAnimation_dwqgj")
 blend_point_3/pos = Vector2(0, -1)
+blend_point_4/node = SubResource("AnimationNodeAnimation_qrqpe")
+blend_point_4/pos = Vector2(-1, 0)
+blend_point_5/node = SubResource("AnimationNodeAnimation_plaom")
+blend_point_5/pos = Vector2(0, 1)
+blend_point_6/node = SubResource("AnimationNodeAnimation_rgrai")
+blend_point_6/pos = Vector2(0, -1)
+blend_point_7/node = SubResource("AnimationNodeAnimation_df5kb")
+blend_point_7/pos = Vector2(1, 0)
+blend_point_8/node = SubResource("AnimationNodeAnimation_j3y86")
+blend_point_8/pos = Vector2(0, 0)
 blend_mode = 1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hv3pf"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kujhb"]
+animation = &"slime_fall_jump_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4g7g1"]
+animation = &"slime_fall_jump_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_humwl"]
+animation = &"slime_fall_jump_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fb7lp"]
+animation = &"slime_fall_jump_right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_y1ko7"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_kujhb")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_4g7g1")
+blend_point_1/pos = Vector2(-1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_humwl")
+blend_point_2/pos = Vector2(0, -0.9)
+blend_point_3/node = SubResource("AnimationNodeAnimation_fb7lp")
+blend_point_3/pos = Vector2(1, 0)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7t0b4"]
 advance_mode = 2
 advance_condition = &"idle"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8abjv"]
+advance_mode = 2
+advance_condition = &"jump"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_niklk"]
+advance_mode = 2
+advance_condition = &"fall"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_05m6d"]
+advance_mode = 2
+advance_condition = &"jump"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l0vj7"]
+advance_mode = 2
+advance_condition = &"fall"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wksx3"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4jfuf"]
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4yq2w"]
+states/End/position = Vector2(696, 125)
+states/Fall/node = SubResource("AnimationNodeBlendSpace2D_ql601")
+states/Fall/position = Vector2(576, 120)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_o1olr")
-states/Idle/position = Vector2(475, 125)
-states/Start/position = Vector2(253, 125)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_hv3pf")]
+states/Idle/position = Vector2(399, 125)
+states/Jump/node = SubResource("AnimationNodeBlendSpace2D_y1ko7")
+states/Jump/position = Vector2(505, 25)
+states/Start/position = Vector2(554, 198)
+transitions = ["Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_7t0b4"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_8abjv"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_niklk"), "Fall", "Jump", SubResource("AnimationNodeStateMachineTransition_05m6d"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_l0vj7"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_wksx3"), "Start", "Fall", SubResource("AnimationNodeStateMachineTransition_4jfuf")]
+graph_offset = Vector2(39, -30)
 
 [sub_resource type="Animation" id="Animation_wagyv"]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_idle"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.629, 0.629)]
+}
 
-[sub_resource type="Animation" id="Animation_7g1cn"]
+[sub_resource type="Animation" id="Animation_jvgh0"]
 resource_name = "slime_idle"
+length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.566667, 0.733333, 0.9),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_idle"]
+}
+
+[sub_resource type="Animation" id="Animation_1xipe"]
+resource_name = "slime_fall_right"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_fall"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.629, 0.629)]
+}
+
+[sub_resource type="Animation" id="Animation_m714e"]
+resource_name = "slime_walk_right"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_walk"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.629, 0.629)]
+}
+
+[sub_resource type="Animation" id="Animation_7xvbd"]
+resource_name = "slime_walk_left"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_walk"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.629, 0.629)]
+}
+
+[sub_resource type="Animation" id="Animation_7a005"]
+resource_name = "slime_fall_left"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_fall"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.629, 0.629)]
+}
+
+[sub_resource type="Animation" id="Animation_saic5"]
+resource_name = "slime_fall_jump_right"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_jump"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.629, 0.629)]
+}
+
+[sub_resource type="Animation" id="Animation_tyfdy"]
+resource_name = "slime_fall_jump_left"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_jump"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.629, 0.629)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kls4j"]
 _data = {
 "RESET": SubResource("Animation_wagyv"),
-"slime_idle": SubResource("Animation_7g1cn")
+"slime_fall_jump_left": SubResource("Animation_tyfdy"),
+"slime_fall_jump_right": SubResource("Animation_saic5"),
+"slime_fall_left": SubResource("Animation_7a005"),
+"slime_fall_right": SubResource("Animation_1xipe"),
+"slime_idle": SubResource("Animation_jvgh0"),
+"slime_walk_left": SubResource("Animation_7xvbd"),
+"slime_walk_right": SubResource("Animation_m714e")
 }
 
 [node name="Slime" type="CharacterBody2D"]
@@ -81,12 +676,13 @@ scale = Vector2(0.524937, 0.524937)
 texture = ExtResource("2_l54ee")
 offset = Vector2(30, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, 3)
-scale = Vector2(0.691566, 0.691566)
-texture = ExtResource("3_iai81")
-hframes = 6
+scale = Vector2(-0.629, 0.629)
+sprite_frames = SubResource("SpriteFrames_833oy")
+animation = &"slime_idle"
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(1, 0.96)
@@ -104,11 +700,14 @@ zoom = Vector2(2.3, 2.3)
 node_a = NodePath("..")
 
 [node name="Slime_AnimationTree" type="AnimationTree" parent="."]
-active = false
 tree_root = SubResource("AnimationNodeStateMachine_4yq2w")
 anim_player = NodePath("../Slime_AnimationPlayer")
+parameters/conditions/fall = false
 parameters/conditions/idle = false
+parameters/conditions/jump = false
+parameters/Fall/blend_position = Vector2(0, 0)
 parameters/Idle/blend_position = Vector2(-0.000947893, 0.013986)
+parameters/Jump/blend_position = Vector2(0, 0)
 script = ExtResource("6_7y61w")
 
 [node name="Slime_AnimationPlayer" type="AnimationPlayer" parent="."]

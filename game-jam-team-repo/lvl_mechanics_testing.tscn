@@ -51,5 +51,5 @@ position = Vector2(117, -5)
 position = Vector2(326, 433)
 
 [node name="ShootyEnemy" parent="." instance=ExtResource("5_k4k2q")]
-position = Vector2(437, 199)
-rotation = -1.95887
+position = Vector2(429, 266)
+rotation = -0.00138307

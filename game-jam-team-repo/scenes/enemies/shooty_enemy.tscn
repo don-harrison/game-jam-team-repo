@@ -2,14 +2,16 @@
 
 [ext_resource type="Script" path="res://scenes/enemies/shooty_enemy.gd" id="1_ph5i5"]
 [ext_resource type="PackedScene" uid="uid://be2xlyje1b3ky" path="res://components/health.tscn" id="2_tku7j"]
-[ext_resource type="Texture2D" uid="uid://btd717g2lyu2l" path="res://Assets/Platformer Assets Pixel/PNG/tile_693.png" id="3_j7s6n"]
+[ext_resource type="Texture2D" uid="uid://cmxw3aw5ve1vt" path="res://Assets/rocket_man.png" id="3_454b0"]
 [ext_resource type="Script" path="res://scenes/enemies/rocket.gd" id="4_760wt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q1bip"]
+size = Vector2(17, 32)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_hltok"]
 
 [node name="ShootyEnemy" type="Node2D"]
+scale = Vector2(1.62062, 1.62062)
 script = ExtResource("1_ph5i5")
 
 [node name="Health" parent="." instance=ExtResource("2_tku7j")]
@@ -21,10 +23,12 @@ collision_layer = 15
 position = Vector2(0, -18)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBody"]
+position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_q1bip")
 
 [node name="Sprite2D" type="Sprite2D" parent="EnemyBody"]
-texture = ExtResource("3_j7s6n")
+texture_filter = 1
+texture = ExtResource("3_454b0")
 
 [node name="RocketBody" type="RigidBody2D" parent="."]
 position = Vector2(4, 1)
