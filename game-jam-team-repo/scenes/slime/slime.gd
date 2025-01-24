@@ -34,9 +34,11 @@ func _physics_process(delta: float) -> void:
 		velocity = calculate_bounce(get_velocity(), last_collision.get_normal())
 	# Add the gravity.
 	velocity += get_gravity() * delta
-	
+		
 	if Input.is_action_just_pressed("left_mouse_click"):
-		var hit_position = raytrace(global_position, get_global_mouse_position())
+		var raytrace_vector: Vector2 = get_global_mouse_position() - global_position
+		var end_raytrace_point: Vector2 = get_global_mouse_position() + raytrace_vector.normalized() * 50
+		var hit_position = raytrace(global_position, end_raytrace_point)
 		grapple.attach_grapple(hit_position)
 	grapple.move_towards_grapple()
 	# Handle jump.
@@ -83,7 +85,7 @@ func raytrace(origin: Vector2, end: Vector2) -> Vector2:
 		var res_position = Vector2(0,0)
 		
 		#Why isnt the result populating when its from underneath a tile
-		print(result)
+		#print(result)
 		if result.has('position'):
 			res_position = result.position
 		return res_position

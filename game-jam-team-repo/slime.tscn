@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://bh03hlcm3sghb"]
+[gd_scene load_steps=71 format=3 uid="uid://bh03hlcm3sghb"]
 
 [ext_resource type="Script" path="res://scenes/slime/slime.gd" id="1_v5bhg"]
 [ext_resource type="Texture2D" uid="uid://bbjxi46u08dgk" path="res://Assets/1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0541.png" id="2_l54ee"]
@@ -203,27 +203,18 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uyb21"]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t3hdm"]
-animation = &"slime_fall_left"
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bqehj"]
-animation = &"slime_fall_left"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cnxvp"]
 animation = &"slime_fall_left"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s3d8d"]
 animation = &"slime_fall_right"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_ql601"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_t3hdm")
-blend_point_0/pos = Vector2(0, 1)
-blend_point_1/node = SubResource("AnimationNodeAnimation_bqehj")
-blend_point_1/pos = Vector2(-1, 0)
-blend_point_2/node = SubResource("AnimationNodeAnimation_cnxvp")
-blend_point_2/pos = Vector2(0, -0.9)
-blend_point_3/node = SubResource("AnimationNodeAnimation_s3d8d")
-blend_point_3/pos = Vector2(1, 0)
+blend_point_0/node = SubResource("AnimationNodeAnimation_bqehj")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_s3d8d")
+blend_point_1/pos = Vector2(1, 0)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m0rqn"]
 animation = &"slime_idle"
@@ -273,27 +264,29 @@ blend_point_8/node = SubResource("AnimationNodeAnimation_j3y86")
 blend_point_8/pos = Vector2(0, 0)
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kujhb"]
-animation = &"slime_fall_jump_left"
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4g7g1"]
-animation = &"slime_fall_jump_left"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_humwl"]
 animation = &"slime_fall_jump_left"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fb7lp"]
 animation = &"slime_fall_jump_right"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p4kxj"]
+animation = &"slime_fall_jump_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m6g26"]
+animation = &"slime_fall_jump_left"
+
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_y1ko7"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_kujhb")
-blend_point_0/pos = Vector2(0, 1)
-blend_point_1/node = SubResource("AnimationNodeAnimation_4g7g1")
-blend_point_1/pos = Vector2(-1, 0)
-blend_point_2/node = SubResource("AnimationNodeAnimation_humwl")
-blend_point_2/pos = Vector2(0, -0.9)
-blend_point_3/node = SubResource("AnimationNodeAnimation_fb7lp")
-blend_point_3/pos = Vector2(1, 0)
+blend_point_0/node = SubResource("AnimationNodeAnimation_4g7g1")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_fb7lp")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_p4kxj")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_m6g26")
+blend_point_3/pos = Vector2(-1, 0)
+max_space = Vector2(1, 1.01)
+snap = Vector2(0.05, 0.1)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7t0b4"]
@@ -374,8 +367,8 @@ tracks/2/keys = {
 "values": [Vector2(-0.629, 0.629)]
 }
 
-[sub_resource type="Animation" id="Animation_jvgh0"]
-resource_name = "slime_idle"
+[sub_resource type="Animation" id="Animation_tyfdy"]
+resource_name = "slime_fall_jump_left"
 length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
@@ -400,159 +393,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"slime_idle"]
-}
-
-[sub_resource type="Animation" id="Animation_1xipe"]
-resource_name = "slime_fall_right"
-length = 0.5
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"slime_fall"]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-0.629, 0.629)]
-}
-
-[sub_resource type="Animation" id="Animation_m714e"]
-resource_name = "slime_walk_right"
-length = 0.5
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"slime_walk"]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.629, 0.629)]
-}
-
-[sub_resource type="Animation" id="Animation_7xvbd"]
-resource_name = "slime_walk_left"
-length = 0.5
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"slime_walk"]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-0.629, 0.629)]
-}
-
-[sub_resource type="Animation" id="Animation_7a005"]
-resource_name = "slime_fall_left"
-length = 0.5
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"slime_fall"]
+"values": [&"slime_jump"]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -608,8 +449,8 @@ tracks/2/keys = {
 "values": [Vector2(-0.629, 0.629)]
 }
 
-[sub_resource type="Animation" id="Animation_tyfdy"]
-resource_name = "slime_fall_jump_left"
+[sub_resource type="Animation" id="Animation_7a005"]
+resource_name = "slime_fall_left"
 length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
@@ -634,7 +475,159 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"slime_jump"]
+"values": [&"slime_fall"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.629, 0.629)]
+}
+
+[sub_resource type="Animation" id="Animation_1xipe"]
+resource_name = "slime_fall_right"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_fall"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.629, 0.629)]
+}
+
+[sub_resource type="Animation" id="Animation_jvgh0"]
+resource_name = "slime_idle"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_idle"]
+}
+
+[sub_resource type="Animation" id="Animation_7xvbd"]
+resource_name = "slime_walk_left"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_walk"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.629, 0.629)]
+}
+
+[sub_resource type="Animation" id="Animation_m714e"]
+resource_name = "slime_walk_right"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_walk"]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -682,7 +675,6 @@ position = Vector2(0, 3)
 scale = Vector2(-0.629, 0.629)
 sprite_frames = SubResource("SpriteFrames_833oy")
 animation = &"slime_idle"
-frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(1, 0.96)
@@ -704,10 +696,10 @@ tree_root = SubResource("AnimationNodeStateMachine_4yq2w")
 anim_player = NodePath("../Slime_AnimationPlayer")
 parameters/conditions/fall = false
 parameters/conditions/idle = false
-parameters/conditions/jump = false
-parameters/Fall/blend_position = Vector2(0, 0)
+parameters/conditions/jump = true
+parameters/Fall/blend_position = Vector2(0.00273478, 0.983936)
 parameters/Idle/blend_position = Vector2(-0.000947893, 0.013986)
-parameters/Jump/blend_position = Vector2(0, 0)
+parameters/Jump/blend_position = Vector2(0.0246125, 0.0859716)
 script = ExtResource("6_7y61w")
 
 [node name="Slime_AnimationPlayer" type="AnimationPlayer" parent="."]

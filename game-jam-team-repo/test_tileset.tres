@@ -862,11 +862,10 @@ texture_region_size = Vector2i(21, 21)
 22:15/0 = 0
 27:16/0 = 0
 1:6/0 = 0
-1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10.5, 10.5, -10.5, -10.5, 10.5, -10.5, 10.5, 10.5)
-1:6/0/physics_layer_0/polygon_0/one_way_margin = 0.0
+1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10, -9.5, 10, -9.5, 10, 9.5, -10, 9.5)
 
 [resource]
-tile_size = Vector2i(20, 20)
+tile_size = Vector2i(20, 19)
 physics_layer_0/collision_layer = 3
 sources/1 = SubResource("TileSetAtlasSource_2lpxi")
 pattern_0 = SubResource("TileMapPattern_4uoy2")
