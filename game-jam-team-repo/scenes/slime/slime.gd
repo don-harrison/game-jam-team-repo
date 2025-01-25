@@ -12,6 +12,7 @@ const MAX_HEALTH = 3
 @onready var debug_line: Node2D = $DebugLine
 @onready var health: Node = $Health
 @onready var grapple: Node2D = $Grapple
+@onready var slime_animation_player: AnimationPlayer = $Slime_AnimationPlayer
 
 func _ready() -> void:
 	health.max_health = MAX_HEALTH
@@ -32,6 +33,9 @@ func _physics_process(delta: float) -> void:
 			var damageable_object = damageable_object_body.get_parent()
 			SignalManager.slime_collision.emit(self, damageable_object_body, velocity)
 		velocity = calculate_bounce(get_velocity(), last_collision.get_normal())
+
+		if(last_collision.get_normal().y == -1 || last_collision.get_normal().x == 1 || last_collision.get_normal().x == -1):
+			SignalManager.slime_bounce.emit(last_collision.get_normal())
 	# Add the gravity.
 	velocity += get_gravity() * delta
 		

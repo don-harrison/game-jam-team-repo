@@ -1,7 +1,9 @@
-[gd_scene load_steps=71 format=3 uid="uid://bh03hlcm3sghb"]
+[gd_scene load_steps=98 format=3 uid="uid://bh03hlcm3sghb"]
 
 [ext_resource type="Script" path="res://scenes/slime/slime.gd" id="1_v5bhg"]
 [ext_resource type="Texture2D" uid="uid://bbjxi46u08dgk" path="res://Assets/1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0541.png" id="2_l54ee"]
+[ext_resource type="Texture2D" uid="uid://b7f50r3hwoogp" path="res://Assets/slime_bounce_floor.png" id="3_ids5l"]
+[ext_resource type="Texture2D" uid="uid://cr2g8b0bex4qs" path="res://Assets/slime_bounce_wall.png" id="4_2w1an"]
 [ext_resource type="PackedScene" uid="uid://be2xlyje1b3ky" path="res://components/health.tscn" id="4_ct4i7"]
 [ext_resource type="Texture2D" uid="uid://c5s2xqnngc3au" path="res://Assets/slime_idle.png" id="4_du4x7"]
 [ext_resource type="PackedScene" uid="uid://bs8fs52x682or" path="res://grapple.tscn" id="5_vqape"]
@@ -9,6 +11,50 @@
 [ext_resource type="Texture2D" uid="uid://tm4s7j3kbsti" path="res://Assets/slime_walk_right.png" id="7_02c2x"]
 [ext_resource type="Texture2D" uid="uid://bgwlc02pil5nh" path="res://Assets/slime_falling_left.png" id="7_lq4jw"]
 [ext_resource type="Texture2D" uid="uid://8axqqliwt6h5" path="res://Assets/slime_jump_left.png" id="8_h17lt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sro5k"]
+atlas = ExtResource("3_ids5l")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ikq16"]
+atlas = ExtResource("3_ids5l")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fyyhi"]
+atlas = ExtResource("3_ids5l")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jn5gs"]
+atlas = ExtResource("3_ids5l")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cladx"]
+atlas = ExtResource("3_ids5l")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_071k7"]
+atlas = ExtResource("3_ids5l")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rx3d1"]
+atlas = ExtResource("4_2w1an")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hy1uj"]
+atlas = ExtResource("4_2w1an")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rmnn"]
+atlas = ExtResource("4_2w1an")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2qe83"]
+atlas = ExtResource("4_2w1an")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xuh8o"]
+atlas = ExtResource("4_2w1an")
+region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mvcj6"]
 atlas = ExtResource("7_lq4jw")
@@ -58,10 +104,6 @@ region = Rect2(128, 0, 32, 32)
 atlas = ExtResource("4_du4x7")
 region = Rect2(160, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ppyvp"]
-atlas = ExtResource("8_h17lt")
-region = Rect2(0, 0, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ondod"]
 atlas = ExtResource("8_h17lt")
 region = Rect2(32, 0, 32, 32)
@@ -81,6 +123,10 @@ region = Rect2(128, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_lrcyh"]
 atlas = ExtResource("8_h17lt")
 region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ppyvp"]
+atlas = ExtResource("8_h17lt")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bxrgc"]
 atlas = ExtResource("7_02c2x")
@@ -108,6 +154,49 @@ region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_833oy"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sro5k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ikq16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fyyhi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jn5gs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cladx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_071k7")
+}],
+"loop": true,
+"name": &"slime_bounce_floor",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rx3d1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hy1uj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rmnn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2qe83")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xuh8o")
+}],
+"loop": true,
+"name": &"slime_bounce_wall",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mvcj6")
@@ -156,9 +245,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ppyvp")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_ondod")
 }, {
 "duration": 1.0,
@@ -172,8 +258,11 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lrcyh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ppyvp")
 }],
-"loop": true,
+"loop": false,
 "name": &"slime_jump",
 "speed": 5.0
 }, {
@@ -215,6 +304,8 @@ blend_point_0/pos = Vector2(-1, 0)
 blend_point_1/node = SubResource("AnimationNodeAnimation_s3d8d")
 blend_point_1/pos = Vector2(1, 0)
 blend_mode = 1
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_7jf5c"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m0rqn"]
 animation = &"slime_idle"
@@ -289,6 +380,19 @@ max_space = Vector2(1, 1.01)
 snap = Vector2(0.05, 0.1)
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yx1fj"]
+animation = &"slime_bounce_wall_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5lvpc"]
+animation = &"slime_bounce_wall_right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_fnmy8"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_yx1fj")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_5lvpc")
+blend_point_1/pos = Vector2(1, 0)
+blend_mode = 1
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7t0b4"]
 advance_mode = 2
 advance_condition = &"idle"
@@ -316,20 +420,54 @@ advance_condition = &"idle"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4jfuf"]
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uc3ph"]
+advance_mode = 2
+advance_condition = &"fall"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ft1du"]
+advance_mode = 2
+advance_condition = &"wall_bounce"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_brj6x"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6gdp2"]
+advance_mode = 2
+advance_condition = &"wall_bounce"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o0dco"]
+advance_mode = 2
+advance_condition = &"floor_bounce"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ujdlj"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o5udp"]
+advance_mode = 2
+advance_condition = &"jump"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4yq2w"]
-states/End/position = Vector2(696, 125)
+states/End/position = Vector2(948, 184)
 states/Fall/node = SubResource("AnimationNodeBlendSpace2D_ql601")
-states/Fall/position = Vector2(576, 120)
+states/Fall/position = Vector2(657, 139)
+states/Floor_Bounce/node = SubResource("AnimationNodeBlendSpace2D_7jf5c")
+states/Floor_Bounce/position = Vector2(885, 63)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_o1olr")
-states/Idle/position = Vector2(399, 125)
+states/Idle/position = Vector2(335, 151)
 states/Jump/node = SubResource("AnimationNodeBlendSpace2D_y1ko7")
 states/Jump/position = Vector2(505, 25)
-states/Start/position = Vector2(554, 198)
-transitions = ["Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_7t0b4"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_8abjv"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_niklk"), "Fall", "Jump", SubResource("AnimationNodeStateMachineTransition_05m6d"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_l0vj7"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_wksx3"), "Start", "Fall", SubResource("AnimationNodeStateMachineTransition_4jfuf")]
-graph_offset = Vector2(39, -30)
+states/Start/position = Vector2(606, 249)
+states/Wall_Bounce/node = SubResource("AnimationNodeBlendSpace2D_fnmy8")
+states/Wall_Bounce/position = Vector2(730, -28)
+transitions = ["Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_7t0b4"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_8abjv"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_niklk"), "Fall", "Jump", SubResource("AnimationNodeStateMachineTransition_05m6d"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_l0vj7"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_wksx3"), "Start", "Fall", SubResource("AnimationNodeStateMachineTransition_4jfuf"), "Wall_Bounce", "Fall", SubResource("AnimationNodeStateMachineTransition_uc3ph"), "Fall", "Wall_Bounce", SubResource("AnimationNodeStateMachineTransition_ft1du"), "Wall_Bounce", "Jump", SubResource("AnimationNodeStateMachineTransition_brj6x"), "Jump", "Wall_Bounce", SubResource("AnimationNodeStateMachineTransition_6gdp2"), "Fall", "Floor_Bounce", SubResource("AnimationNodeStateMachineTransition_o0dco"), "Floor_Bounce", "Jump", SubResource("AnimationNodeStateMachineTransition_ujdlj"), "Start", "Jump", SubResource("AnimationNodeStateMachineTransition_o5udp")]
+graph_offset = Vector2(238, -10)
 
 [sub_resource type="Animation" id="Animation_wagyv"]
 length = 0.5
+
+[sub_resource type="Animation" id="Animation_appe1"]
+resource_name = "slime_bounce_floor"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -337,10 +475,10 @@ tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.533333, 0.7, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": []
+"values": [0, 1, 2, 3, 4, 5]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -352,7 +490,63 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"slime_idle"]
+"values": [&"slime_bounce_floor"]
+}
+
+[sub_resource type="Animation" id="Animation_t721q"]
+resource_name = "slime_bounce_wall_left"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.233333, 0.366667, 0.466667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_bounce_wall"]
+}
+
+[sub_resource type="Animation" id="Animation_j20wg"]
+resource_name = "slime_bounce_wall_right"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.233333, 0.366667, 0.466667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_bounce_wall"]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -364,7 +558,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-0.629, 0.629)]
+"values": [Vector2(0.629, 0.629)]
 }
 
 [sub_resource type="Animation" id="Animation_tyfdy"]
@@ -645,6 +839,9 @@ tracks/2/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kls4j"]
 _data = {
 "RESET": SubResource("Animation_wagyv"),
+"slime_bounce_floor": SubResource("Animation_appe1"),
+"slime_bounce_wall_left": SubResource("Animation_t721q"),
+"slime_bounce_wall_right": SubResource("Animation_j20wg"),
 "slime_fall_jump_left": SubResource("Animation_tyfdy"),
 "slime_fall_jump_right": SubResource("Animation_saic5"),
 "slime_fall_left": SubResource("Animation_7a005"),
@@ -672,9 +869,10 @@ offset = Vector2(30, 0)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, 3)
-scale = Vector2(-0.629, 0.629)
+scale = Vector2(1e-05, 1e-05)
 sprite_frames = SubResource("SpriteFrames_833oy")
 animation = &"slime_idle"
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(1, 0.96)
@@ -695,11 +893,15 @@ node_a = NodePath("..")
 tree_root = SubResource("AnimationNodeStateMachine_4yq2w")
 anim_player = NodePath("../Slime_AnimationPlayer")
 parameters/conditions/fall = false
-parameters/conditions/idle = false
-parameters/conditions/jump = true
+parameters/conditions/floor_bounce = false
+parameters/conditions/idle = true
+parameters/conditions/jump = false
+parameters/conditions/wall_bounce = false
 parameters/Fall/blend_position = Vector2(0.00273478, 0.983936)
-parameters/Idle/blend_position = Vector2(-0.000947893, 0.013986)
+parameters/Floor_Bounce/blend_position = Vector2(0, 0)
+parameters/Idle/blend_position = Vector2(-0.0276855, 0.0319149)
 parameters/Jump/blend_position = Vector2(0.0246125, 0.0859716)
+parameters/Wall_Bounce/blend_position = Vector2(0, 0)
 script = ExtResource("6_7y61w")
 
 [node name="Slime_AnimationPlayer" type="AnimationPlayer" parent="."]

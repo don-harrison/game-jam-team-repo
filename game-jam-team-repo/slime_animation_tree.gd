@@ -4,11 +4,21 @@ extends AnimationTree
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	SignalManager.slime_bounce.connect(slime_bounce)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	update_animation_parameters(delta)
+
+func slime_bounce(normal: Vector2):
+	#floor bounce
+	if(normal.y == -1):	
+		pass
+		#var state_machine:AnimationNodeStateMachine = self["tree_root"]
+		#state_machine.start
+	#wall bounce
+	else:	
+		pass
 
 func update_animation_parameters(delta: float):
 	#print(slime.velocity)
