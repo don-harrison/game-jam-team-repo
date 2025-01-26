@@ -3,7 +3,7 @@ class_name Slime
 
 const TOP_SPEED = 2000.0
 const RUN_ACCEL = 500.0
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -330.0
 const AIR_RESISTANCE = 3.0
 const DEFORMATION_AMOUNT = .8
 const FRICTION = 1
@@ -13,6 +13,7 @@ const MAX_HEALTH = 3
 @onready var health: Node = $Health
 @onready var grapple: Node2D = $Grapple
 @onready var slime_animation_player: AnimationPlayer = $Slime_AnimationPlayer
+var jumping: bool = false
 
 func _ready() -> void:
 	health.max_health = MAX_HEALTH
@@ -33,6 +34,7 @@ func _physics_process(delta: float) -> void:
 			var damageable_object = damageable_object_body.get_parent()
 			SignalManager.slime_collision.emit(self, damageable_object_body, velocity)
 		velocity = calculate_bounce(get_velocity(), last_collision.get_normal())
+		jumping = false
 
 		if(last_collision.get_normal().y == -1 || last_collision.get_normal().x == 1 || last_collision.get_normal().x == -1):
 			SignalManager.slime_bounce.emit(last_collision.get_normal())
@@ -46,18 +48,11 @@ func _physics_process(delta: float) -> void:
 		grapple.attach_grapple(hit_position)
 	grapple.move_towards_grapple()
 	# Handle jump.
-	if Input.is_action_just_pressed("jump"): # Only jump while on the floor
-		velocity.y = JUMP_VELOCITY
+	if Input.is_action_just_pressed("jump"):
+		if(!jumping):
+			jumping = true # Only jump while on the floor
+			velocity.y = JUMP_VELOCITY
 		grapple.set_grapple_point(Vector2.ZERO)
-		
-	
-	# Allow for air movement control, so we don't check for on floor
-	# if we are stopped, get initial boost
-	#if Input.is_action_just_pressed("left") && velocity.x == 0:
-	#	velocity.x = -RUN_ACCEL
-		
-	#if Input.is_action_just_pressed("right") && velocity.x == 0:
-	#	velocity.x = RUN_ACCEL
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
