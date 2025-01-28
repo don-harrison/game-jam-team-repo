@@ -92,3 +92,7 @@ func raytrace(origin: Vector2, end: Vector2) -> Vector2:
 func rotate_arrow_pointer() -> void:
 	var mouse_direction = get_local_mouse_position()
 	arrow.rotation = mouse_direction.angle()
+
+
+func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	pass # Replace with function body.

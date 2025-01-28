@@ -4,3 +4,5 @@ extends Node
 # emitted when the slime collides with anything damageable
 signal slime_collision(slime_body: CharacterBody2D, other_body: DamageablePhysicsObject, slime_velocity: Vector2)
 signal slime_bounce(normal: Vector2)
+signal paused(is_paused: bool)
+signal main_menu

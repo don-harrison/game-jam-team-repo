@@ -1,11 +1,12 @@
-[gd_scene load_steps=47 format=3 uid="uid://bh03hlcm3sghb"]
+[gd_scene load_steps=48 format=3 uid="uid://bh03hlcm3sghb"]
 
 [ext_resource type="Script" path="res://scenes/slime/slime.gd" id="1_v5bhg"]
 [ext_resource type="Texture2D" uid="uid://bbjxi46u08dgk" path="res://Assets/1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0541.png" id="2_l54ee"]
 [ext_resource type="PackedScene" uid="uid://be2xlyje1b3ky" path="res://components/health.tscn" id="4_ct4i7"]
-[ext_resource type="PackedScene" uid="uid://bs8fs52x682or" path="res://grapple.tscn" id="5_vqape"]
+[ext_resource type="PackedScene" uid="uid://bs8fs52x682or" path="res://scenes/grapple.tscn" id="5_vqape"]
 [ext_resource type="Script" path="res://slime_animation_tree.gd" id="6_7y61w"]
 [ext_resource type="SpriteFrames" uid="uid://crc8rgv026nb6" path="res://Assets/slime.tres" id="6_brgl8"]
+[ext_resource type="PackedScene" uid="uid://b7tuc2trg6o7k" path="res://scenes/pause_menu.tscn" id="7_ate4o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uyb21"]
 
@@ -571,10 +572,6 @@ offset = Vector2(30, 0)
 scale = Vector2(1, 0.96)
 shape = SubResource("CircleShape2D_uyb21")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -1)
-zoom = Vector2(2.3, 2.3)
-
 [node name="DebugLine" type="Node2D" parent="."]
 
 [node name="Health" parent="." instance=ExtResource("4_ct4i7")]
@@ -604,3 +601,9 @@ position = Vector2(0, 3)
 scale = Vector2(0.59375, 0.59375)
 sprite_frames = ExtResource("6_brgl8")
 animation = &"slime_fall"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -1)
+zoom = Vector2(2.3, 2.3)
+
+[node name="Pause Menu" parent="Camera2D" instance=ExtResource("7_ate4o")]
