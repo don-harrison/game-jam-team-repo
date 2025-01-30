@@ -1,20 +1,569 @@
-[gd_scene load_steps=6 format=3 uid="uid://bh03hlcm3sghb"]
+[gd_scene load_steps=49 format=3 uid="uid://b64wk5ykubhi1"]
 
-[ext_resource type="Script" path="res://character_body_2d.gd" id="1_v5bhg"]
+[ext_resource type="Script" path="res://scenes/slime/slime.gd" id="1_l0q1o"]
+[ext_resource type="PackedScene" uid="uid://b7tuc2trg6o7k" path="res://scenes/pause_menu.tscn" id="2_7bxct"]
 [ext_resource type="Texture2D" uid="uid://bbjxi46u08dgk" path="res://Assets/1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0541.png" id="2_l54ee"]
-[ext_resource type="Texture2D" uid="uid://bxivdsn2am3n1" path="res://Assets/Platformer Assets Pixel/PNG/tile_020.png" id="3_t8kww"]
 [ext_resource type="PackedScene" uid="uid://be2xlyje1b3ky" path="res://components/health.tscn" id="4_ct4i7"]
+[ext_resource type="PackedScene" uid="uid://bs8fs52x682or" path="res://scenes/grapple.tscn" id="5_2s8aq"]
+[ext_resource type="Script" path="res://slime_animation_tree.gd" id="6_vlgu3"]
+[ext_resource type="SpriteFrames" uid="uid://crc8rgv026nb6" path="res://Assets/slime.tres" id="7_utyau"]
+[ext_resource type="AudioStream" uid="uid://dbp3xwcf8up5l" path="res://Assets/sounds/slime 1.wav" id="8_sneiy"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vochj"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_uyb21"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x2lf2"]
+animation = &"slime_fall_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_huf1y"]
+animation = &"slime_fall_right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_ql601"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_x2lf2")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_huf1y")
+blend_point_1/pos = Vector2(1, 0)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4g7g1"]
+animation = &"slime_jump_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fb7lp"]
+animation = &"slime_jump_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p4kxj"]
+animation = &"slime_fall_jump_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m6g26"]
+animation = &"slime_fall_jump_left"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_y1ko7"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_4g7g1")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_fb7lp")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_p4kxj")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_m6g26")
+blend_point_3/pos = Vector2(-1, 0)
+max_space = Vector2(1, 1.01)
+snap = Vector2(0.05, 0.1)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yx1fj"]
+animation = &"slime_bounce_wall_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5lvpc"]
+animation = &"slime_bounce_wall_right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_fnmy8"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_yx1fj")
+blend_point_0/pos = Vector2(1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_5lvpc")
+blend_point_1/pos = Vector2(-1, 0)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ygq72"]
+animation = &"slime_bounce_floor"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7pcf4"]
+animation = &"slime_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_niklk"]
+advance_mode = 2
+advance_condition = &"fall"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_05m6d"]
+advance_mode = 2
+advance_condition = &"jump"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4jfuf"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i6ybu"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1d2ti"]
+advance_mode = 2
+advance_expression = "state == WALL_BOUNCE"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k40yf"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v1ecr"]
+advance_mode = 2
+advance_expression = "state == FLOOR_BOUNCE"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ka0lf"]
+advance_mode = 2
+advance_expression = "state == WALL_BOUNCE"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6dqhk"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_duanq"]
+break_loop_at_end = true
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2l4tj"]
+advance_mode = 2
+advance_condition = &"fall"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t0awk"]
+advance_mode = 2
+advance_condition = &"jump"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ye40x"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4yq2w"]
+states/End/position = Vector2(950, 185)
+states/Fall/node = SubResource("AnimationNodeBlendSpace2D_ql601")
+states/Fall/position = Vector2(570, 156)
+states/Jump/node = SubResource("AnimationNodeBlendSpace2D_y1ko7")
+states/Jump/position = Vector2(477, 33)
+states/Start/position = Vector2(634, 278)
+states/Wall_Bounce/node = SubResource("AnimationNodeBlendSpace2D_fnmy8")
+states/Wall_Bounce/position = Vector2(612, -59)
+states/slime_bounce_floor/node = SubResource("AnimationNodeAnimation_ygq72")
+states/slime_bounce_floor/position = Vector2(866, 94)
+states/slime_idle/node = SubResource("AnimationNodeAnimation_7pcf4")
+states/slime_idle/position = Vector2(347, 143)
+transitions = ["Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_niklk"), "Fall", "Jump", SubResource("AnimationNodeStateMachineTransition_05m6d"), "Start", "Fall", SubResource("AnimationNodeStateMachineTransition_4jfuf"), "Fall", "slime_idle", SubResource("AnimationNodeStateMachineTransition_i6ybu"), "Jump", "Wall_Bounce", SubResource("AnimationNodeStateMachineTransition_1d2ti"), "Wall_Bounce", "Jump", SubResource("AnimationNodeStateMachineTransition_k40yf"), "Fall", "slime_bounce_floor", SubResource("AnimationNodeStateMachineTransition_v1ecr"), "Fall", "Wall_Bounce", SubResource("AnimationNodeStateMachineTransition_ka0lf"), "Wall_Bounce", "Fall", SubResource("AnimationNodeStateMachineTransition_6dqhk"), "slime_bounce_floor", "Jump", SubResource("AnimationNodeStateMachineTransition_duanq"), "slime_idle", "Fall", SubResource("AnimationNodeStateMachineTransition_2l4tj"), "slime_idle", "Jump", SubResource("AnimationNodeStateMachineTransition_t0awk"), "Jump", "slime_idle", SubResource("AnimationNodeStateMachineTransition_ye40x")]
+graph_offset = Vector2(44, -47)
+
+[sub_resource type="Animation" id="Animation_wagyv"]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_fall"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.59375, 0.59375)]
+}
+
+[sub_resource type="Animation" id="Animation_appe1"]
+resource_name = "slime_bounce_floor"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.166667, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 2, 1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_bounce_floor"]
+}
+
+[sub_resource type="Animation" id="Animation_t721q"]
+resource_name = "slime_bounce_wall_left"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_bounce_wall"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1, 0.166667, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 2, 3, 4, 5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.594, 0.594)]
+}
+
+[sub_resource type="Animation" id="Animation_vqf27"]
+resource_name = "slime_bounce_wall_right"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_bounce_wall"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.133333, 0.166667, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 2, 3, 4, 5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.594, 0.594)]
+}
+
+[sub_resource type="Animation" id="Animation_qt17p"]
+resource_name = "slime_fall_left"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_fall"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.566667, 0.8, 0.933333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.594, 0.594)]
+}
+
+[sub_resource type="Animation" id="Animation_1xipe"]
+resource_name = "slime_fall_right"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_fall"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.566667, 0.8, 0.933333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.594, 0.594)]
+}
+
+[sub_resource type="Animation" id="Animation_jvgh0"]
+resource_name = "slime_idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.366667, 0.533333, 0.7, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_idle"]
+}
+
+[sub_resource type="Animation" id="Animation_urf22"]
+resource_name = "slime_jump_left"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_jump"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.366667, 0.566667, 0.766667, 0.933333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.594, 0.594)]
+}
+
+[sub_resource type="Animation" id="Animation_saic5"]
+resource_name = "slime_jump_right"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_jump"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.366667, 0.566667, 0.766667, 0.933333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.594, 0.594)]
+}
+
+[sub_resource type="Animation" id="Animation_8wapx"]
+resource_name = "slime_walk_left"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_walk"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.3, 0.466667, 0.666667, 0.933333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.594, 0.594)]
+}
+
+[sub_resource type="Animation" id="Animation_m714e"]
+resource_name = "slime_walk_right"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"slime_walk"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.3, 0.466667, 0.666667, 0.933333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kls4j"]
+_data = {
+"RESET": SubResource("Animation_wagyv"),
+"slime_bounce_floor": SubResource("Animation_appe1"),
+"slime_bounce_wall_left": SubResource("Animation_t721q"),
+"slime_bounce_wall_right": SubResource("Animation_vqf27"),
+"slime_fall_left": SubResource("Animation_qt17p"),
+"slime_fall_right": SubResource("Animation_1xipe"),
+"slime_idle": SubResource("Animation_jvgh0"),
+"slime_jump_left": SubResource("Animation_urf22"),
+"slime_jump_right": SubResource("Animation_saic5"),
+"slime_walk_left": SubResource("Animation_8wapx"),
+"slime_walk_right": SubResource("Animation_m714e")
+}
 
 [node name="Slime" type="CharacterBody2D"]
 z_index = 3
-position = Vector2(1, -3)
+collision_layer = 255
 floor_stop_on_slope = false
-script = ExtResource("1_v5bhg")
+script = ExtResource("1_l0q1o")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_vochj")
+[node name="Pause Menu" parent="." instance=ExtResource("2_7bxct")]
+offset_top = -105.0
+offset_bottom = -105.0
 
 [node name="Arrow" type="Sprite2D" parent="."]
 z_index = 3
@@ -24,13 +573,49 @@ scale = Vector2(0.524937, 0.524937)
 texture = ExtResource("2_l54ee")
 offset = Vector2(30, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
-texture = ExtResource("3_t8kww")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 0.96)
+shape = SubResource("CircleShape2D_uyb21")
 
 [node name="DebugLine" type="Node2D" parent="."]
 
 [node name="Health" parent="." instance=ExtResource("4_ct4i7")]
+
+[node name="Grapple" parent="." node_paths=PackedStringArray("node_a") instance=ExtResource("5_2s8aq")]
+node_a = NodePath("..")
+
+[node name="Slime_AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_4yq2w")
+anim_player = NodePath("../Slime_AnimationPlayer")
+parameters/conditions/fall = false
+parameters/conditions/idle = true
+parameters/conditions/jump = false
+parameters/Fall/blend_position = Vector2(-0.514735, 0.0486486)
+parameters/Jump/blend_position = Vector2(0.477407, 0.0212973)
+parameters/Wall_Bounce/blend_position = Vector2(-0.954421, 0.0531914)
+script = ExtResource("6_vlgu3")
+
+[node name="Slime_AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kls4j")
+}
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 3)
+scale = Vector2(0.59375, 0.59375)
+sprite_frames = ExtResource("7_utyau")
+animation = &"slime_fall"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -1)
+zoom = Vector2(2.3, 2.3)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = -8.434
+
+[node name="Bounce Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_sneiy")
+volume_db = -7.67
+pitch_scale = 2.25
+attenuation = 3.4822

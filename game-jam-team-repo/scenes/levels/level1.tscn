@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=4 uid="uid://bq1x6x7wqyhj5"]
 
 [ext_resource type="TileSet" uid="uid://kioaeqp4t48d" path="res://test_tileset.tres" id="1_6x2od"]
-[ext_resource type="PackedScene" uid="uid://bh03hlcm3sghb" path="res://scenes/slime.tscn" id="2_ixa28"]
 [ext_resource type="PackedScene" uid="uid://cvmifsxo60u35" path="res://scenes/enemy.tscn" id="3_p2vwg"]
 [ext_resource type="PackedScene" uid="uid://f4jcapbxpx0s" path="res://scenes/enemies/shooty_enemy.tscn" id="4_msulp"]
+[ext_resource type="PackedScene" uid="uid://b64wk5ykubhi1" path="res://scenes/slime/slime.tscn" id="5_6a6up"]
 [ext_resource type="AudioStream" uid="uid://dr06reu17g5pc" path="res://Assets/sounds/game_song.wav" id="5_13vvy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_37bah"]
@@ -24,9 +24,6 @@ tile_map_data = PackedByteArray("AAAAAAAAAQAQABgAAAABAAAAAQAQABgAAAACAAAAAQAQABg
 tile_set = ExtResource("1_6x2od")
 
 [node name="BackgroundLayer" type="TileMapLayer" parent="TileMapLayers"]
-
-[node name="Slime" parent="." instance=ExtResource("2_ixa28")]
-position = Vector2(117, -26)
 
 [node name="GoombaEnemy" parent="." instance=ExtResource("3_p2vwg")]
 position = Vector2(274, -326)
@@ -85,3 +82,6 @@ shape = SubResource("RectangleShape2D_46gbw")
 stream = ExtResource("5_13vvy")
 volume_db = -20.701
 autoplay = true
+
+[node name="Slime" parent="." instance=ExtResource("5_6a6up")]
+position = Vector2(115, -56)
