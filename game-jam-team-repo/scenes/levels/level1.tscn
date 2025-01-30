@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://bq1x6x7wqyhj5"]
+[gd_scene load_steps=9 format=4 uid="uid://bq1x6x7wqyhj5"]
 
 [ext_resource type="TileSet" uid="uid://kioaeqp4t48d" path="res://test_tileset.tres" id="1_6x2od"]
-[ext_resource type="PackedScene" uid="uid://bh03hlcm3sghb" path="res://slime.tscn" id="2_ixa28"]
-[ext_resource type="PackedScene" uid="uid://cvmifsxo60u35" path="res://enemy.tscn" id="3_p2vwg"]
+[ext_resource type="PackedScene" uid="uid://bh03hlcm3sghb" path="res://scenes/slime.tscn" id="2_ixa28"]
+[ext_resource type="PackedScene" uid="uid://cvmifsxo60u35" path="res://scenes/enemy.tscn" id="3_p2vwg"]
 [ext_resource type="PackedScene" uid="uid://f4jcapbxpx0s" path="res://scenes/enemies/shooty_enemy.tscn" id="4_msulp"]
+[ext_resource type="AudioStream" uid="uid://dr06reu17g5pc" path="res://Assets/sounds/game_song.wav" id="5_13vvy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_37bah"]
 size = Vector2(2273, 20)
@@ -79,3 +80,8 @@ shape = SubResource("RectangleShape2D_e8git")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/StaticBody2D6"]
 position = Vector2(1177, -311)
 shape = SubResource("RectangleShape2D_46gbw")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_13vvy")
+volume_db = -20.701
+autoplay = true
