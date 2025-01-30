@@ -3,8 +3,9 @@
 [ext_resource type="FontFile" uid="uid://bfl0fykgsknx6" path="res://Assets/fonts/SuperBoys-vmW67.ttf" id="1_s0dwb"]
 
 [resource]
+resource_local_to_scene = true
 line_spacing = 0.0
 font = ExtResource("1_s0dwb")
-font_size = 39
-font_color = Color(0, 0, 0, 1)
-outline_size = 11
+font_size = 40
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)

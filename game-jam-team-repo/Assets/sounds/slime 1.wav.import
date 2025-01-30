@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dbp3xwcf8up5l"
+path="res://.godot/imported/slime 1.wav-80d72f8a4445c3827577e870e0167e92.sample"
+
+[deps]
+
+source_file="res://Assets/sounds/slime 1.wav"
+dest_files=["res://.godot/imported/slime 1.wav-80d72f8a4445c3827577e870e0167e92.sample"]
+
+[params]
+
+force/8_bit=true
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

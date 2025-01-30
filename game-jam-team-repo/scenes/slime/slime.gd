@@ -8,11 +8,17 @@ const AIR_RESISTANCE = 3.0
 const DEFORMATION_AMOUNT = .8
 const FRICTION = 1
 const MAX_HEALTH = 3
+const JUMP = preload("res://Assets/sounds/jump.wav")
+const SLIME_1 = preload("res://Assets/sounds/slime 1.wav")
+
 @onready var arrow: Sprite2D = $Arrow
 @onready var debug_line: Node2D = $DebugLine
 @onready var health: Node = $Health
 @onready var grapple: Node2D = $Grapple
 @onready var slime_animation_player: AnimationPlayer = $Slime_AnimationPlayer
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var bounce_sound: AudioStreamPlayer2D = $"Bounce Sound"
+
 var jumping: bool = false
 
 func _ready() -> void:
@@ -34,6 +40,10 @@ func _physics_process(delta: float) -> void:
 			var damageable_object = damageable_object_body.get_parent()
 			SignalManager.slime_collision.emit(self, damageable_object_body, velocity)
 		velocity = calculate_bounce(get_velocity(), last_collision.get_normal())
+		
+		if velocity.y > 15 || velocity.y < -15:
+			bounce_sound.pitch_scale = random_float_range(2, 2.5)
+			bounce_sound.play()
 		jumping = false
 
 		if(last_collision.get_normal().y == -1 || last_collision.get_normal().x == 1 || last_collision.get_normal().x == -1):
@@ -52,6 +62,9 @@ func _physics_process(delta: float) -> void:
 		if(!jumping):
 			jumping = true # Only jump while on the floor
 			velocity.y = JUMP_VELOCITY
+			audio_stream_player_2d.stream = JUMP
+			audio_stream_player_2d.pitch_scale = random_float_range(.85, 1)
+			audio_stream_player_2d.play()
 		grapple.set_grapple_point(Vector2.ZERO)
 
 	# Get the input direction and handle the movement/deceleration.
@@ -92,7 +105,7 @@ func raytrace(origin: Vector2, end: Vector2) -> Vector2:
 func rotate_arrow_pointer() -> void:
 	var mouse_direction = get_local_mouse_position()
 	arrow.rotation = mouse_direction.angle()
-
-
-func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	pass # Replace with function body.
+	
+	
+func random_float_range(min: float, max: float) -> float:
+	return randf() * (max - min) + min

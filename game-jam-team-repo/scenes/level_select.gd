@@ -4,12 +4,20 @@ var options = []
 const UI_FONT_SETTINGS = preload("res://Assets/fonts/ui_font_settings.tres")
 @onready var v_box_container: VBoxContainer = $MarginContainer/VBoxContainer
 const level_directory = "res://scenes/levels/"
+var level_1 = preload("res://scenes/levels/level1.tscn")
+var level_dictionary: Dictionary = {"level_1": level_1}
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var dir = DirAccess.open(level_directory)
-	if dir:
-		for file_name in dir.get_files():
-			options.append(file_name.replace(".tscn", ""))
+	#var dir = DirAccess.open(level_directory)
+	#if dir:
+		#for file_name in dir.get_files():
+			#var clean_file_name
+			#if file_name.ends_with(".remap"):
+				#clean_file_name = file_name.replace(".remap", "")
+			#if file_name.ends_with(".tscn"):
+				#clean_file_name = file_name.replace(".tscn", "")
+			#level_dictionary[clean_file_name] = preload(file_name)
+	options = level_dictionary.keys()
 	options.append("Back")
 	for option in options:
 		var label = Label.new()
@@ -41,4 +49,7 @@ func _on_label_gui_input(event: InputEvent, label: Label):
 		if(label.text == "Back"):
 			SignalManager.main_menu.emit()
 		else:
-			get_tree().change_scene_to_file("res://scenes/levels/%s.tscn" % label.text)
+			print(label.text)
+			print(level_dictionary)
+			print(level_dictionary[label.text])
+			get_tree().change_scene_to_packed(level_dictionary[label.text])

@@ -4,7 +4,8 @@ var options = ["Resume", "Main Menu", "Quit"]
 @onready var pause_menu: Control = $"."
 @onready var v_box_container: VBoxContainer = $MarginContainer/VBoxContainer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+var select_sound = preload("res://Assets/sounds/selection beep.wav")
 const UI_FONT_SETTINGS = preload("res://Assets/fonts/ui_font_settings.tres")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -30,6 +31,9 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_label_mouse_entered(label: Label):
+	audio_stream_player_2d.stream = select_sound
+	audio_stream_player_2d.pitch_scale = random_float_range(.9, 1)
+	audio_stream_player_2d.play()
 	label.scale += Vector2(.25,.25)
 	
 func _on_label_mouse_exited(label: Label):
@@ -47,3 +51,6 @@ func _on_label_gui_input(event: InputEvent, label: Label):
 func game_paused(is_paused: bool) -> void:
 	get_tree().paused = !get_tree().paused
 	pause_menu.visible = !pause_menu.visible
+
+func random_float_range(min: float, max: float) -> float:
+	return randf() * (max - min) + min

@@ -1,6 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://gv7ki1s7xew5"]
+[gd_scene load_steps=6 format=3 uid="uid://gv7ki1s7xew5"]
 
 [ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_0vjtq"]
+[ext_resource type="FontFile" uid="uid://bfl0fykgsknx6" path="res://Assets/fonts/SuperBoys-vmW67.ttf" id="2_0wfew"]
+[ext_resource type="AudioStream" uid="uid://dp1fohikokbj" path="res://Assets/sounds/lanes game.wav" id="3_df8qk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dq3nc"]
+resource_local_to_scene = true
+line_spacing = 0.0
+font = ExtResource("2_0wfew")
+font_size = 30
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0f8ho"]
+resource_local_to_scene = true
+line_spacing = 0.0
+font = ExtResource("2_0wfew")
+font_size = 75
+font_color = Color(0, 1, 0, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -10,6 +29,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0vjtq")
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Instructions" type="Label" parent="MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Click on surface to grapple
+W/D for left and right
+Space to release grapple and to jump"
+label_settings = SubResource("LabelSettings_dq3nc")
+vertical_alignment = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -27,3 +64,23 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -243.0
+offset_top = 6.0
+offset_right = 129.0
+offset_bottom = 106.0
+grow_horizontal = 2
+rotation = 0.0872665
+scale = Vector2(1.61566, 1.61566)
+text = "Slip'n Slime"
+label_settings = SubResource("LabelSettings_0f8ho")
+
+[node name="Main Menu Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_df8qk")
+volume_db = -20.0
+autoplay = true

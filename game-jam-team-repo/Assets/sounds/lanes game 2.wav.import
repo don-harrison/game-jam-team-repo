@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cnsph3t750onq"
+path="res://.godot/imported/lanes game 2.wav-74f453c2673c3a20cb5b510c28450056.sample"
+
+[deps]
+
+source_file="res://Assets/sounds/lanes game 2.wav"
+dest_files=["res://.godot/imported/lanes game 2.wav-74f453c2673c3a20cb5b510c28450056.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
