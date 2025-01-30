@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7tuc2trg6o7k"]
+
+[ext_resource type="Script" path="res://scenes/pause_menu.gd" id="1_jek2d"]
+
+[sub_resource type="Animation" id="Animation_1rd1p"]
+resource_name = "selected"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vgauu"]
+_data = {
+"selected": SubResource("Animation_1rd1p")
+}
+
+[node name="Pause Menu" type="Control"]
+process_mode = 3
+visible = false
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -104.0
+offset_right = -1.0
+offset_bottom = -104.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00154, 0.984375)
+script = ExtResource("1_jek2d")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 48.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vgauu")
+}
