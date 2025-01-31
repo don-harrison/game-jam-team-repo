@@ -56,7 +56,7 @@ func attach_grapple(target: Vector2) -> void:
 	attach_point.add_child(sprite)
 	attach_point.z_index = 4
 	get_parent().get_parent().add_child(attach_point)
-	#self.add_child(draw_debug_line(node_a.global_position, grapple_point))
+	#self.add_child(draw_debug_line(node_a.global_position, node_a.global_position + grapple_point))
 	
 func draw_debug_line(start: Vector2, end: Vector2):
 		var line: Line2D = Line2D.new()

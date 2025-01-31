@@ -6,6 +6,7 @@ const UI_FONT_SETTINGS = preload("res://Assets/fonts/ui_font_settings.tres")
 const level_directory = "res://scenes/levels/"
 var level_1 = preload("res://scenes/levels/level1.tscn")
 var level_dictionary: Dictionary = {"level_1": level_1}
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#var dir = DirAccess.open(level_directory)

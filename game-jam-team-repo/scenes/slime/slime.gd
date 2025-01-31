@@ -10,7 +10,7 @@ const FRICTION = 1
 const MAX_HEALTH = 3
 const JUMP = preload("res://Assets/sounds/jump.wav")
 const SLIME_1 = preload("res://Assets/sounds/slime 1.wav")
-
+const GAME_OVER = preload("res://scenes/game_over.tscn")
 @onready var arrow: Sprite2D = $Arrow
 @onready var debug_line: Node2D = $DebugLine
 @onready var health: Node = $Health
@@ -18,6 +18,7 @@ const SLIME_1 = preload("res://Assets/sounds/slime 1.wav")
 @onready var slime_animation_player: AnimationPlayer = $Slime_AnimationPlayer
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var bounce_sound: AudioStreamPlayer2D = $"Bounce Sound"
+@onready var exit: Area2D = $"../Exit"
 
 var jumping: bool = false
 
@@ -109,3 +110,9 @@ func rotate_arrow_pointer() -> void:
 	
 func random_float_range(min: float, max: float) -> float:
 	return randf() * (max - min) + min
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	#print(body.name)
+	if(body.name == "Slime"):
+		get_tree().change_scene_to_packed(GAME_OVER)
