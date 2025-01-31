@@ -43,6 +43,10 @@ func attach_grapple(target: Vector2) -> void:
 	grapple_point = target
 	
 	var spring: DampedSpringJoint2D = DampedSpringJoint2D.new()
+	spring.damping = 0.001
+	spring.length = (global_position - grapple_point).length()
+	spring.rest_length = 30
+	spring.stiffness = 20
 	var attach_point: Area2D = Area2D.new()
 	attach_point.global_position = grapple_point
 	print(grapple_point)
