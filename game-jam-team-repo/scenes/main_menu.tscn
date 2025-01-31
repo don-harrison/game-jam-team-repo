@@ -44,7 +44,9 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "Click on surface to grapple
 W/D for left and right
-Space to release grapple and to jump"
+Space to release grapple and to jump
+
+Reach the Door at the top!"
 label_settings = SubResource("LabelSettings_dq3nc")
 vertical_alignment = 2
 
